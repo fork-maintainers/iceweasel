@@ -302,6 +302,7 @@ class TabTrayView(
                     is TabTrayItemMenu.Item.CloseAllTabs -> interactor.onCloseAllTabsClicked(
                         isPrivateModeSelected
                     )
+                    is TabTrayItemMenu.Item.OpenRecentlyClosed -> interactor.onOpenRecentlyClosedClicked()
                 }
             }
 
@@ -747,6 +748,7 @@ class TabTrayItemMenu(
         object OpenTabSettings : Item()
         object SaveToCollection : Item()
         object CloseAllTabs : Item()
+        object OpenRecentlyClosed : Item()
     }
 
     val menuBuilder by lazy { BrowserMenuBuilder(menuItems) }
@@ -774,6 +776,13 @@ class TabTrayItemMenu(
                 textColorResource = R.color.primary_text_normal_theme
             ) {
                 onItemTapped.invoke(Item.OpenTabSettings)
+            },
+
+            SimpleBrowserMenuItem(
+                context.getString(R.string.tab_tray_menu_recently_closed),
+                textColorResource = R.color.primary_text_normal_theme
+            ) {
+                onItemTapped.invoke(Item.OpenRecentlyClosed)
             },
 
             SimpleBrowserMenuItem(
