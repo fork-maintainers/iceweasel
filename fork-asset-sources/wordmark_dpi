@@ -1,7 +1,7 @@
 Scaling for wordmark files in app/src/forkRelease/res/drawable-*/ic_logo_wordmark_normal.png and app/src/forkRelease/res/drawable-*/ic_logo_wordmark_private.png
 This is the browser banner on the home page
 *normal.png is for light theme (use dark or black text)
-*private.png is for dark theme and private browsing (use white or ligh text)
+*private.png is for dark theme and private browsing (use white or light text)
 
 Scale to the following for the respective folders:
 *hdpi - 651x120
