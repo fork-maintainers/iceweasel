@@ -38,6 +38,8 @@
     <string name="tab_tray_select_collection">Выберите коллекцию</string>
     <!-- Content description for close button while in multiselect mode in tab tray -->
     <string name="tab_tray_close_multiselect_content_description">Выйти из режима множественного выбора</string>
+    <!-- Content description for back button in full screen tabs screen -->
+    <string name="tabs_screen_close_screen_description">Закрыть экран вкладок</string>
     <!-- Content description for save to collection button while in multiselect mode in tab tray -->
     <string name="tab_tray_collection_button_multiselect_content_description">Сохранить выбранные вкладки в коллекцию</string>
     <!-- Content description for checkmark while tab is selected while in multiselect mode in tab tray. The first parameter is the title of the tab selected -->
@@ -278,6 +280,8 @@
     <string name="preferences_open_links_in_a_private_tab">Открывать ссылки в приватной вкладке</string>
     <!-- Preference for allowing screenshots to be taken while in a private tab-->
     <string name="preferences_allow_screenshots_in_private_mode">Разрешить скриншоты при приватном просмотре</string>
+    <!-- Will inform the user of the risk of activating Allow screenshots in private browsing option -->
+    <string name="preferences_screenshots_in_private_mode_disclaimer">Если разрешено, приватные вкладки будут видны, когда открыто несколько приложений.</string>
     <!-- Preference for adding private browsing shortcut -->
     <string name="preferences_add_private_browsing_shortcut">Добавить ярлык приватного просмотра</string>
     <!-- Preference for accessibility -->
@@ -298,6 +302,12 @@
     <string name="preferences_theme">Тема</string>
     <!-- Preference for customizing the home screen -->
     <string name="preferences_home">Домой</string>
+    <!-- Preference for gestures based actions -->
+    <string name="preferences_gestures">Жесты</string>
+    <!-- Preference for customizing the tabs tray -->
+    <string name="preferences_tabs_tray">Панель вкладок</string>
+    <!-- Preference for customizing the tabs tray FAB -->
+    <string name="preferences_tabs_tray_fab">Плавающая кнопка действия (ПКД)</string>
     <!-- Preference for settings related to visual options -->
     <string name="preferences_customize">Персонализация</string>
     <!-- Preference description for banner about signing in -->
@@ -334,7 +344,11 @@
     <string name="preferences_search_bookmarks">Поиск закладок</string>
     <!-- Preference for account settings -->
     <string name="preferences_account_settings">Настройки Аккаунта</string>
-
+    <!-- Preference for add-ons custom source -->
+    <string name="preferences_addons_customization">Настройка источника пользовательских дополнений</string>
+    <!-- Placeholder text shown in the search bar before a user enters text -->
+    <string name="addons_search_hint">Поиск дополнений</string>
+    
     <!-- Preference for open links in third party apps -->
     <string name="preferences_open_links_in_apps">Открывать ссылки в приложениях</string>
 
@@ -473,7 +487,17 @@
     <string name="preference_auto_battery_theme">Учитывать режим экономии батареи</string>
     <!-- Preference for using following device theme -->
     <string name="preference_follow_device_theme">Использовать тему устройства</string>
-
+    
+    <!-- Gestures Preferences-->
+    <!-- Preferences for using pull to refresh in a webpage -->
+    <string name="preference_gestures_website_pull_to_refresh">Потянуть, чтобы обновить</string>
+    <!-- Preference for using the dynamic toolbar -->
+    <string name="preference_gestures_dynamic_toolbar">Прокрутить, чтобы скрыть панель инструментов</string>
+    <!-- Preference for switching tabs by swiping horizontally on the toolbar -->
+    <string name="preference_gestures_swipe_toolbar_switch_tabs">Провести по панели инструментов в сторону для переключения вкладок</string>
+    <!-- Preference for showing the opened tabs by swiping up on the toolbar-->
+    <string name="preference_gestures_swipe_toolbar_show_tabs">Провести по панели инструментов вверх, чтобы открыть вкладки</string>
+   
     <!-- Library -->
     <!-- Option in Library to open Sessions page -->
     <string name="library_sessions">Сессии</string>
@@ -1115,6 +1139,18 @@
     <string name="onboarding_tracking_protection_strict_option">Строгая</string>
     <!-- text for strict blocking option button description -->
     <string name="onboarding_tracking_protection_strict_button_description_2">Блокирует больше трекеров, рекламы и всплывающих окон. Страницы будут грузиться быстрее, но часть функций может не работать.</string>
+    <!-- text for the tabs tray layout onboarding card header -->
+    <string name="onboarding_tabs_layout_header">Выберите макет панели вкладок</string>
+    <!-- text for the tabs tray layout card description-->
+    <string name="onboarding_tabs_tray_layout_description">Выберите, либо старый стиль экрана вкладок Firefox (Fennec), либо панель вкладок нового стиля (Fenix).</string>
+    <!-- text for old Fennec style tab screen layout -->
+    <string name="onboarding_tabs_tray_fennec_layout_button">Старый стиль Fennec (по умолчанию)</string>
+    <!-- text for old Fennec style description -->
+    <string name="onboarding_tabs_tray_fennec_layout_description">Щелчок по счётчику вкладок на панели инструментов покажет вам экран вкладок с макетом, похожим на предыдущую (Fennec) версию Firefox.</string>
+    <!-- text for Fenix style tab tray layout -->
+    <string name="onboarding_tabs_tray_fenix_layout_button">Новый стиль Fenix</string>
+    <!-- text for strict blocking option button description -->
+    <string name="onboarding_tabs_tray_fenix_layout_description">Щелчок по счётчику вкладок на панели инструментов покажет вам новый макет панели вкладок из Fenix версии Firefox.</string>
     <!-- text for the toolbar position card header
         In English this is an idiom for "choose a side as in an argument or fight"
         but it is ok to make this more literally about "choosing a position in a physical space -->
@@ -1380,6 +1416,10 @@
     <string name="preferences_passwords_saved_logins_username">Имя пользователя</string>
     <!-- The header for the password for a login -->
     <string name="preferences_passwords_saved_logins_password">Пароль</string>
+    <!-- Title for strip url preference in customization settings -->
+    <string name="preferences_strip_url_title">Убрать HTTP/HTTPS/WWW из URL-адресов</string>
+    <!-- Description for strip url preference in customization settings -->
+    <string name="preferences_strip_url_description">Включите удаление HTTP/HTTPS/WWW из URL-адресов на панели инструментов и в области вкладок</string>
     <!-- Message displayed in security prompt to reenter a secret pin to access saved logins -->
     <string name="preferences_passwords_saved_logins_enter_pin">Введите ваш PIN-код ещё раз</string>
     <!-- Message displayed in security prompt to access saved logins -->
@@ -1402,8 +1442,12 @@
     <string name="logins_site_copied">Сайт скопирован в буфер обмена</string>
     <!-- Content Description (for screenreaders etc) read for the button to copy a password in logins-->
     <string name="saved_logins_copy_password">Копировать пароль</string>
+    <!-- Content Description (for screenreaders etc) read for the button to clear a password while editing a login-->
+    <string name="saved_logins_clear_password">Очистить пароль</string>
     <!-- Content Description (for screenreaders etc) read for the button to copy a username in logins -->
     <string name="saved_login_copy_username">Копировать имя пользователя</string>
+    <!-- Content Description (for screenreaders etc) read for the button to clear a username while editing a login -->
+    <string name="saved_login_clear_username">Очистить имя пользователя</string>
     <!-- Content Description (for screenreaders etc) read for the button to copy a site in logins -->
     <string name="saved_login_copy_site">Копировать сайт</string>
     <!-- Content Description (for screenreaders etc) read for the button to open a site in logins -->
@@ -1584,6 +1628,28 @@
 
     <!-- Label for the show most visited sites preference -->
     <string name="top_sites_toggle_top_frecent_sites">Показать самые посещаемые сайты</string>
+
+    <!-- Label for add-ons custom source account preference -->
+    <string name="addons_custom_source_account">Установить пользовательскую учетную запись дополнений</string>
+    <!-- Label for add-ons custom source collection preference -->
+    <string name="addons_custom_source_collection">Установить собственную коллекцию дополнений</string>
+
+    <!-- Label for enable compact tabs in tabs tray preference -->
+    <string name="enable_compact_tabs">Включить компактные вкладки</string>
+    <!-- Label for enable top tabs tray preference -->
+    <string name="enable_top_tabs_tray">Включить верхнюю панель вкладок</string>
+    <!-- Label for fullscreen tabs tray preference -->
+    <string name="use_fullscreen_tabs_screen">Включить полноэкранный экран вкладок</string>
+    <!-- Label for reverse tab order in tabs tray preference -->
+    <string name="reverse_tab_order_tabs_tray">Обратный порядок вкладок в панели вкладок</string>
+    <!-- Summary for reverse tab order preference -->
+    <string name="reverse_tab_order_description">Включите, чтобы помещать новые вкладки в начало списка вкладок, отключите, чтобы помещать новые вкладки в конец списка вкладок</string>
+    <!-- Label for enable FAB in tabs tray preference -->
+    <string name="enable_fab_tabs_tray">Включить ПКД для новой вкладки</string>
+    <!-- Label for top FAB position in tabs tray preference -->
+    <string name="fab_tabs_tray_top">Поместить ПКД вверху</string>
+    <!-- Label for top FAB position in tabs tray preference -->
+    <string name="fab_tabs_tray_top_description">Разрешить размещать кнопку для новой вкладки вверху, отключите, чтобы разместить ее внизу</string>
 
     <!-- Content description for close button in collection placeholder. -->
     <string name="remove_home_collection_placeholder_content_description">Убрать</string>
