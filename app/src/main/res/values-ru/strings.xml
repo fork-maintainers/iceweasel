@@ -344,6 +344,8 @@
     <string name="preferences_search_bookmarks">Поиск закладок</string>
     <!-- Preference for account settings -->
     <string name="preferences_account_settings">Настройки Аккаунта</string>
+    <!-- Preference for enabling url autocomplete-->
+    <string name="preferences_enable_autocomplete_urls">Автозаполнение URL-адресов</string>
     <!-- Preference for add-ons custom source -->
     <string name="preferences_addons_customization">Настройка источника пользовательских дополнений</string>
     <!-- Placeholder text shown in the search bar before a user enters text -->
@@ -1654,7 +1656,7 @@
     <!-- Content description for close button in collection placeholder. -->
     <string name="remove_home_collection_placeholder_content_description">Убрать</string>
 
-    <!-- depcrecated: text for the firefox account onboarding card header
+    <!-- Deprecated: text for the firefox account onboarding card header
     The first parameter is the name of the app (e.g. Firefox Preview) -->
     <string name="onboarding_firefox_account_header">Получите максимум от %s.</string>
 
