@@ -8,7 +8,6 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.res.Resources
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import mozilla.components.concept.engine.prompt.ShareData
@@ -16,7 +15,6 @@ import org.mozilla.fenix.R
 import org.mozilla.fenix.browser.browsingmode.BrowsingMode
 import org.mozilla.fenix.components.FenixSnackbar
 
-@Suppress("TooManyFunctions")
 interface HistoryController {
     fun handleOpen(item: HistoryItem, mode: BrowsingMode? = null)
     fun handleSelect(item: HistoryItem)
@@ -28,10 +26,8 @@ interface HistoryController {
     fun handleCopyUrl(item: HistoryItem)
     fun handleShare(item: HistoryItem)
     fun handleRequestSync()
-    fun handleEnterRecentlyClosed()
 }
 
-@Suppress("TooManyFunctions")
 class DefaultHistoryController(
     private val store: HistoryFragmentStore,
     private val navController: NavController,
@@ -104,12 +100,5 @@ class DefaultHistoryController(
             syncHistory.invoke()
             store.dispatch(HistoryFragmentAction.FinishSync)
         }
-    }
-
-    override fun handleEnterRecentlyClosed() {
-        navController.navigate(
-            HistoryFragmentDirections.actionGlobalRecentlyClosed(),
-            NavOptions.Builder().setPopUpTo(R.id.recentlyClosedFragment, true).build()
-        )
     }
 }

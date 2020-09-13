@@ -77,11 +77,6 @@ interface HistoryViewInteractor : SelectionInteractor<HistoryItem> {
      * Called when the user requests a sync of the history
      */
     fun onRequestSync()
-
-    /**
-     * Called when the user clicks on recently closed tab button.
-     */
-    fun onRecentlyClosedClicked()
 }
 
 /**

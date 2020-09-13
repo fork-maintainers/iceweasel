@@ -25,7 +25,6 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
-import mozilla.components.browser.state.action.RecentlyClosedAction
 import mozilla.components.concept.engine.prompt.ShareData
 import mozilla.components.lib.state.ext.consumeFrom
 import mozilla.components.service.fxa.sync.SyncReason
@@ -50,14 +49,11 @@ import org.mozilla.fenix.utils.allowUndo
 @SuppressWarnings("TooManyFunctions", "LargeClass")
 class HistoryFragment : LibraryPageFragment<HistoryItem>(), UserInteractionHandler {
     private lateinit var historyStore: HistoryFragmentStore
+    private lateinit var historyView: HistoryView
     private lateinit var historyInteractor: HistoryInteractor
     private lateinit var viewModel: HistoryViewModel
     private var undoScope: CoroutineScope? = null
     private var pendingHistoryDeletionJob: (suspend () -> Unit)? = null
-
-    private var _historyView: HistoryView? = null
-    protected val historyView: HistoryView
-        get() = _historyView!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -95,10 +91,7 @@ class HistoryFragment : LibraryPageFragment<HistoryItem>(), UserInteractionHandl
         historyInteractor = HistoryInteractor(
             historyController
         )
-        _historyView = HistoryView(
-            view.historyLayout,
-            historyInteractor
-        )
+        historyView = HistoryView(view.historyLayout, historyInteractor)
 
         return view
     }
@@ -241,11 +234,6 @@ class HistoryFragment : LibraryPageFragment<HistoryItem>(), UserInteractionHandl
         return historyView.onBackPressed()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _historyView = null
-    }
-
     private fun openItem(item: HistoryItem, mode: BrowsingMode? = null) {
         requireComponents.analytics.metrics.track(Event.HistoryItemOpened)
 
@@ -267,9 +255,8 @@ class HistoryFragment : LibraryPageFragment<HistoryItem>(), UserInteractionHandl
                 }
                 setPositiveButton(R.string.delete_browsing_data_prompt_allow) { dialog: DialogInterface, _ ->
                     historyStore.dispatch(HistoryFragmentAction.EnterDeletionMode)
-                    viewLifecycleOwner.lifecycleScope.launch(IO) {
+                    viewLifecycleOwner.lifecycleScope.launch {
                         requireComponents.analytics.metrics.track(Event.HistoryAllItemsRemoved)
-                        requireComponents.core.store.dispatch(RecentlyClosedAction.RemoveAllClosedTabAction)
                         requireComponents.core.historyStorage.deleteEverything()
                         launch(Main) {
                             viewModel.invalidate()

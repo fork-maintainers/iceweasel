@@ -20,7 +20,6 @@ import mozilla.components.browser.session.Session
 import mozilla.components.browser.session.SessionManager
 import mozilla.components.browser.session.engine.EngineMiddleware
 import mozilla.components.browser.session.storage.SessionStorage
-import mozilla.components.browser.state.action.RecentlyClosedAction
 import mozilla.components.browser.state.state.BrowserState
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.browser.storage.sync.PlacesBookmarksStorage
@@ -41,7 +40,6 @@ import mozilla.components.feature.media.middleware.MediaMiddleware
 import mozilla.components.feature.pwa.ManifestStorage
 import mozilla.components.feature.pwa.WebAppShortcutManager
 import mozilla.components.feature.readerview.ReaderViewMiddleware
-import mozilla.components.feature.recentlyclosed.RecentlyClosedMiddleware
 import mozilla.components.feature.session.HistoryDelegate
 import mozilla.components.feature.top.sites.DefaultTopSitesStorage
 import mozilla.components.feature.top.sites.PinnedSiteStorage
@@ -142,15 +140,12 @@ class Core(private val context: Context, private val crashReporter: CrashReporti
     val store by lazy {
         BrowserStore(
             middleware = listOf(
-                RecentlyClosedMiddleware(context, RECENTLY_CLOSED_MAX, engine),
                 MediaMiddleware(context, MediaService::class.java),
                 DownloadMiddleware(context, DownloadService::class.java),
                 ReaderViewMiddleware(),
                 ThumbnailsMiddleware(thumbnailStorage)
             ) + EngineMiddleware.create(engine, ::findSessionById)
-        ).also {
-            it.dispatch(RecentlyClosedAction.InitializeRecentlyClosedState)
-        }
+        )
     }
 
     private fun findSessionById(tabId: String): Session? {
@@ -349,7 +344,7 @@ class Core(private val context: Context, private val crashReporter: CrashReporti
     fun getPreferredColorScheme(): PreferredColorScheme {
         val inDark =
             (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
-                    Configuration.UI_MODE_NIGHT_YES
+                Configuration.UI_MODE_NIGHT_YES
         return when {
             context.settings().shouldUseDarkTheme -> PreferredColorScheme.Dark
             context.settings().shouldUseLightTheme -> PreferredColorScheme.Light
@@ -362,6 +357,5 @@ class Core(private val context: Context, private val crashReporter: CrashReporti
         private const val KEY_STRENGTH = 256
         private const val KEY_STORAGE_NAME = "core_prefs"
         private const val PASSWORDS_KEY = "passwords"
-        private const val RECENTLY_CLOSED_MAX = 5
     }
 }
