@@ -262,14 +262,9 @@ class TabTrayView(
                     concatAdapter.addAdapter(syncedTabsController.adapter)
                 }
 
-                // Disabling the following block of code because it causes a crash when
-                // accessibility services are enabled! `notifyDataSetChanged()` is incompatible
-                // with concatAdapter. See: https://github.com/mozilla-mobile/fenix/issues/14540
-                // WARNING: Merging the upstream fix for this will cause lot of conflicts!
-                //
-                // if (hasAccessibilityEnabled) {
-                //    tabsAdapter.notifyItemRangeChanged(0, tabs.size)
-                // }
+                 if (hasAccessibilityEnabled) {
+                    tabsAdapter.notifyItemRangeChanged(0, tabs.size)
+                 }
 
                 if (!hasLoaded) {
                     hasLoaded = true
