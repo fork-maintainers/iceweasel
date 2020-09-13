@@ -13,7 +13,6 @@ import org.mozilla.fenix.search.toolbar.ToolbarInteractor
  * Interactor for the search screen
  * Provides implementations for the AwesomeBarView and ToolbarView
  */
-@Suppress("TooManyFunctions")
 class SearchInteractor(
     private val searchController: SearchController
 ) : AwesomeBarInteractor, ToolbarInteractor {
@@ -56,9 +55,5 @@ class SearchInteractor(
 
     override fun onExistingSessionSelected(tabId: String) {
         searchController.handleExistingSessionSelected(tabId)
-    }
-
-    fun onCameraPermissionsNeeded() {
-        searchController.handleCameraPermissionsNeeded()
     }
 }

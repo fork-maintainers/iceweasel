@@ -40,8 +40,7 @@ object SupportUtils {
         SEARCH_SUGGESTION("how-search-firefox-preview"),
         CUSTOM_SEARCH_ENGINES("custom-search-engines"),
         UPGRADE_FAQ("firefox-preview-upgrade-faqs"),
-        SYNC_SETUP("how-set-firefox-sync-firefox-preview"),
-        QR_CAMERA_ACCESS("qr-camera-access")
+        SYNC_SETUP("how-set-firefox-sync-firefox-preview")
     }
 
     enum class MozillaPage(internal val path: String) {
