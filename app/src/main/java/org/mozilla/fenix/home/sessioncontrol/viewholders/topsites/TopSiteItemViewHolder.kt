@@ -16,7 +16,6 @@ import mozilla.components.browser.menu.item.SimpleBrowserMenuItem
 import mozilla.components.feature.top.sites.TopSite
 import mozilla.components.feature.top.sites.TopSite.Type.DEFAULT
 import mozilla.components.feature.top.sites.TopSite.Type.FRECENT
-import mozilla.components.feature.top.sites.TopSite.Type.PINNED
 import org.mozilla.fenix.R
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.loadIntoView
@@ -55,14 +54,8 @@ class TopSiteItemViewHolder(
     }
 
     fun bind(topSite: TopSite) {
+        this.topSite = topSite
         top_site_title.text = topSite.title
-
-        pin_indicator.visibility = if (topSite.type == PINNED) {
-            View.VISIBLE
-        } else {
-            View.GONE
-        }
-
         when (topSite.url) {
             SupportUtils.POCKET_TRENDING_URL -> {
                 favicon_image.setImageDrawable(getDrawable(itemView.context, R.drawable.ic_pocket))
@@ -71,8 +64,6 @@ class TopSiteItemViewHolder(
                 itemView.context.components.core.icons.loadIntoView(favicon_image, topSite.url)
             }
         }
-
-        this.topSite = topSite
     }
 
     private fun onTouchEvent(
