@@ -32,6 +32,7 @@ import org.mozilla.fenix.ext.showToolbar
 class PairFragment : Fragment(R.layout.fragment_pair), UserInteractionHandler {
 
     private val qrFeature = ViewBoundFeatureWrapper<QrFeature>()
+    private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,11 +71,10 @@ class PairFragment : Fragment(R.layout.fragment_pair), UserInteractionHandler {
             view = view
         )
 
-        val cameraPermissionsDenied = PreferenceManager.getDefaultSharedPreferences(context)
-            .getBoolean(
-                getPreferenceKey(R.string.pref_key_camera_permissions),
-                false
-            )
+        val cameraPermissionsDenied = preferences.getBoolean(
+            getPreferenceKey(R.string.pref_key_camera_permissions),
+            false
+        )
 
         qrFeature.withFeature {
             if (cameraPermissionsDenied) {
@@ -116,15 +116,13 @@ class PairFragment : Fragment(R.layout.fragment_pair), UserInteractionHandler {
                     qrFeature.withFeature {
                         it.onPermissionsResult(permissions, grantResults)
                     }
-                    PreferenceManager.getDefaultSharedPreferences(context)
-                        .edit().putBoolean(
-                            getPreferenceKey(R.string.pref_key_camera_permissions), false
-                        ).apply()
+                    preferences.edit().putBoolean(
+                        getPreferenceKey(R.string.pref_key_camera_permissions), false
+                    ).apply()
                 } else {
-                    PreferenceManager.getDefaultSharedPreferences(context)
-                        .edit().putBoolean(
-                            getPreferenceKey(R.string.pref_key_camera_permissions), true
-                        ).apply()
+                    preferences.edit().putBoolean(
+                        getPreferenceKey(R.string.pref_key_camera_permissions), true
+                    ).apply()
                     findNavController().popBackStack(R.id.turnOnSyncFragment, false)
                 }
             }
