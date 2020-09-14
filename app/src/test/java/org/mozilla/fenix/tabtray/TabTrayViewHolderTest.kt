@@ -62,7 +62,7 @@ class TabTrayViewHolderTest {
         tabViewHolder.bind(tab, false, mockk(), mockk())
 
         assertEquals("m".repeat(MAX_URI_LENGTH), tabViewHolder.urlView?.text)
-        verify { imageLoader.loadIntoView(any(), ImageLoadRequest("123", 92)) }
+        verify { imageLoader.loadIntoView(any(), ImageLoadRequest("123", 130)) }
     }
 
     @Test
