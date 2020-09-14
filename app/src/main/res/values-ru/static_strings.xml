@@ -3,11 +3,6 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <resources>
-    <!-- Name of the application -->
-    <string name="app_name" translatable="false">Iceweasel Preview</string>
-
-    <!-- Preference for developers -->
-    <string name="preference_leakcanary" translatable="false">LeakCanary</string>
 
     <string name="intent_extra_toolbar_color" translatable="false">android.support.customtabs.extra.TOOLBAR_COLOR</string>
     <string name="intent_extra_session" translatable="false">android.support.customtabs.extra.SESSION</string>
