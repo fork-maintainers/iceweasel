@@ -107,7 +107,7 @@
     <androidx.preference.PreferenceCategory
         android:layout="@layout/preference_cat_style"
         android:title="@string/preferences_gestures"
-        app:allowDividerAbove="false"
+        app:allowDividerAbove="true"
         app:iconSpaceReserved="false">
         <androidx.preference.SwitchPreference
             android:key="@string/pref_key_website_pull_to_refresh"
