@@ -1,5 +1,13 @@
 name: Android build
-on: pull_request
+on:
+  push:
+    branches:
+      - fork
+  pull_request:
+    branches:
+      - fork
+  schedule:
+    - cron:  '0 12 * * *' # Every day at 12 PM UTC
 jobs:
   gradle:
     runs-on: ubuntu-latest
