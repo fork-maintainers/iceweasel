@@ -9,7 +9,7 @@ on:
   schedule:
     - cron:  '0 12 * * *' # Every day at 12 PM UTC
 jobs:
-  gradle:
+  run-ktlint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
