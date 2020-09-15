@@ -82,7 +82,6 @@ class Components(private val context: Context) {
         )
     }
 
-
     val appStartupTelemetry by lazy { AppStartupTelemetry(analytics.metrics) }
 
     @Suppress("MagicNumber")

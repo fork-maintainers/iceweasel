@@ -29,7 +29,6 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import mozilla.components.feature.addons.Addon
-import mozilla.components.feature.addons.AddonsProvider
 import mozilla.components.feature.addons.R
 import mozilla.components.feature.addons.ui.AddonsManagerAdapterDelegate
 import mozilla.components.feature.addons.ui.CustomViewHolder
@@ -40,7 +39,6 @@ import mozilla.components.feature.addons.ui.translatedName
 import mozilla.components.feature.addons.ui.translatedSummary
 import mozilla.components.support.base.log.logger.Logger
 import mozilla.components.support.ktx.android.content.res.resolveAttribute
-import network.novak.fenix.components.PagedAddonCollectionProvider
 import java.io.IOException
 import java.text.NumberFormat
 import java.util.Locale
@@ -429,4 +427,3 @@ private fun Addon.inDisabledSection() = isInstalled() && isSupported() && !isEna
 internal fun getFormattedAmount(amount: Int): String {
     return NumberFormat.getNumberInstance(Locale.getDefault()).format(amount)
 }
-

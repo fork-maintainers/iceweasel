@@ -20,6 +20,25 @@ import java.util.Map;
 
 public class RemoteMessage implements Parcelable {
 
+    protected RemoteMessage(Parcel in)
+    {
+    }
+
+    public static final Creator<RemoteMessage> CREATOR = new Creator<RemoteMessage>()
+    {
+        @Override
+        public RemoteMessage createFromParcel(Parcel in)
+        {
+            return new RemoteMessage(in);
+        }
+
+        @Override
+        public RemoteMessage[] newArray(int size)
+        {
+            return new RemoteMessage[size];
+        }
+    };
+
     public int describeContents() {
         return 0;
     }

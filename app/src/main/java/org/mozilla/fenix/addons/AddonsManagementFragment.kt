@@ -6,7 +6,12 @@ package org.mozilla.fenix.addons
 
 import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.accessibility.AccessibilityEvent
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
@@ -16,9 +21,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_add_ons_management.*
-import kotlinx.android.synthetic.main.fragment_add_ons_management.view.*
-import kotlinx.android.synthetic.main.overlay_add_on_progress.view.*
+import kotlinx.android.synthetic.main.fragment_add_ons_management.addonProgressOverlay
+import kotlinx.android.synthetic.main.fragment_add_ons_management.view.add_ons_empty_message
+import kotlinx.android.synthetic.main.fragment_add_ons_management.view.add_ons_list
+import kotlinx.android.synthetic.main.fragment_add_ons_management.view.add_ons_progress_bar
+import kotlinx.android.synthetic.main.overlay_add_on_progress.view.add_ons_overlay_text
+import kotlinx.android.synthetic.main.overlay_add_on_progress.view.cancel_button
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -26,8 +34,8 @@ import mozilla.components.feature.addons.Addon
 import mozilla.components.feature.addons.AddonManagerException
 import mozilla.components.feature.addons.ui.PermissionsDialogFragment
 import mozilla.components.feature.addons.ui.translatedName
-import network.novak.fenix.components.PagedAddonsManagerAdapter
 import network.novak.fenix.components.PagedAddonInstallationDialogFragment
+import network.novak.fenix.components.PagedAddonsManagerAdapter
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.metrics.Event
 import org.mozilla.fenix.ext.components
@@ -42,7 +50,7 @@ import java.util.concurrent.CancellationException
 /**
  * Fragment use for managing add-ons.
  */
-@Suppress("TooManyFunctions")
+@Suppress("LargeClass", "TooManyFunctions")
 class AddonsManagementFragment : Fragment(R.layout.fragment_add_ons_management) {
 
     /**

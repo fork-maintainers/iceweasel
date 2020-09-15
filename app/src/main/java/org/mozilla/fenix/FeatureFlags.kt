@@ -34,11 +34,10 @@ object FeatureFlags {
     /**
      * Enables wait til first contentful paint
      */
-    val waitUntilPaintToDraw = true 
+    const val waitUntilPaintToDraw = true
 
     /**
      * Enables downloads with external download managers.
      */
-    val externalDownloadManager = true 
-
+    const val externalDownloadManager = true
 }
