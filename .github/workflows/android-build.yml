@@ -12,11 +12,14 @@ jobs:
   run-build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v1
         with:
           java-version: 11
-      - uses: eskatos/gradle-command-action@v1
+      - name: Build forkRelease variant of app
+        uses: eskatos/gradle-command-action@v1
         with:
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
@@ -25,11 +28,14 @@ jobs:
   run-testDebug:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v1
         with:
           java-version: 11
-      - uses: eskatos/gradle-command-action@v1
+      - name: Run tests
+        uses: eskatos/gradle-command-action@v1
         with:
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
@@ -38,24 +44,35 @@ jobs:
   run-detekt:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v1
         with:
           java-version: 11
-      - uses: eskatos/gradle-command-action@v1
+      - name: Run detekt
+        uses: eskatos/gradle-command-action@v1
         with:
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
           arguments: detekt
+      - name: Archive detekt results
+        uses: actions/upload-artifact@v2
+        with:
+          name: detekt report
+          path: build/reports/detekt.html
   run-ktlint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v1
         with:
           java-version: 11
-      - uses: eskatos/gradle-command-action@v1
+      - name: Run ktlint
+        uses: eskatos/gradle-command-action@v1
         with:
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
@@ -64,13 +81,21 @@ jobs:
   run-lintDebug:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v1
         with:
           java-version: 11
-      - uses: eskatos/gradle-command-action@v1
+      - name: Run lintDebug
+        uses: eskatos/gradle-command-action@v1
         with:
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
           arguments: lintDebug
+      - name: Archive lint results
+        uses: actions/upload-artifact@v2
+        with:
+          name: lintDebug report
+          path: app/build/reports/lint-results-debug.html
