@@ -88,7 +88,7 @@ object SupportUtils {
     fun getWhatsNewUrl(context: Context) = if (Config.channel.isFennec) {
         getGenericSumoURLForTopic(SumoTopic.UPGRADE_FAQ)
     } else if (Config.channel.isFork) {
-        "https://github.com/fork-maintainers/iceweasel/releases"
+        "https://github.com/fork-maintainers/iceraven-browser/releases"
     } else {
         getSumoURLForTopic(context, SumoTopic.WHATS_NEW)
     }
