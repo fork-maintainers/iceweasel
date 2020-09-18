@@ -12,7 +12,7 @@ object FeatureFlags {
      * Pull-to-refresh allows you to pull the web content down far enough to have the page to
      * reload.
      */
-    const val pullToRefreshEnabled = false
+    const val pullToRefreshEnabled = true
 
     /**
      * Shows Synced Tabs in the tabs tray.
@@ -34,11 +34,15 @@ object FeatureFlags {
     /**
      * Enables wait til first contentful paint
      */
-    val waitUntilPaintToDraw = true 
+    const val waitUntilPaintToDraw = true
 
     /**
      * Enables downloads with external download managers.
      */
-    val externalDownloadManager = true 
+    const val externalDownloadManager = true
 
+    /**
+     * Enables swipe to delete in bookmarks
+     */
+    val bookmarkSwipeToDelete = Config.channel.isNightlyOrDebug
 }

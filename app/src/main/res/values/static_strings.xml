@@ -4,7 +4,7 @@
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <resources>
     <!-- Name of the application -->
-    <string name="app_name" translatable="false">Iceweasel Preview</string>
+    <string name="app_name" translatable="false">Iceraven Preview</string>
 
     <!-- Preference for developers -->
     <string name="preference_leakcanary" translatable="false">LeakCanary</string>
@@ -43,11 +43,11 @@
     <string name="link_text_view_type_announcement" translatable="false">link</string>
 
     <!-- Name of the application for about page -->
-    <string name="daylight_app_name" translatable="false">Iceweasel</string>
+    <string name="daylight_app_name" translatable="false">Iceraven</string>
 
     <!-- MP Migration -->
     <string name="mp_homescreen_tip_title">Looking for your logins?</string>
-    <string name="mp_homescreen_tip_message">If you had a master password before Iceweasel updated, you’ll need to enter it to transfer your saved logins.</string>
+    <string name="mp_homescreen_tip_message">If you had a master password before Iceraven updated, you’ll need to enter it to transfer your saved logins.</string>
     <string name="mp_homescreen_button">Enter master password</string>
     <string name="mp_dialog_title_recovery_transfer_saved_logins">Transfer saved logins</string>
     <string name="mp_dialog_message_recovery_transfer_saved_logins">Enter your previous master password.</string>
@@ -55,7 +55,7 @@
     <string name="mp_dialog_negative_transfer_saved_logins">Cancel</string>
     <string name="mp_dialog_error_transfer_saved_logins">Invalid password</string>
     <string name="mp_dialog_title_transfer_success">Transfer successful</string>
-    <string name="mp_dialog_message_transfer_success">Your saved logins have been transferred to Iceweasel.</string>
+    <string name="mp_dialog_message_transfer_success">Your saved logins have been transferred to Iceraven.</string>
     <string name="mp_dialog_positive_transfer_success">View saved logins</string>
     <string name="mp_dialog_close_transfer">Close</string>
     <string name="mp_dialog_title_transfer_failure">Transfer failed</string>

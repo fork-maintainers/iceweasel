@@ -15,7 +15,6 @@ import android.view.accessibility.AccessibilityManager
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
 import androidx.lifecycle.LifecycleOwner
-import androidx.preference.EditTextPreference
 import mozilla.components.feature.sitepermissions.SitePermissionsRules
 import mozilla.components.feature.sitepermissions.SitePermissionsRules.Action
 import mozilla.components.feature.sitepermissions.SitePermissionsRules.AutoplayAction
@@ -324,6 +323,11 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         default = true
     )
 
+    val shouldShowSyncedTabsSuggestions by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_search_synced_tabs),
+        default = true
+    )
+
     val shouldShowClipboardSuggestions by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_show_clipboard_suggestions),
         default = true
@@ -618,6 +622,11 @@ class Settings(private val appContext: Context) : PreferencesHolder {
 
     val shouldShowSearchSuggestions by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_show_search_suggestions),
+        default = true
+    )
+
+    val shouldAutocompleteInAwesomebar by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_enable_autocomplete_urls),
         default = true
     )
 

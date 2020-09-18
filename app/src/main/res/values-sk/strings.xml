@@ -139,7 +139,7 @@
     <!-- Browser menu button that opens a user's library -->
     <string name="browser_menu_library">Knižnica</string>
     <!-- Browser menu toggle that requests a desktop site -->
-    <string name="browser_menu_desktop_site">Verzia stránky pre stolné počítače</string>
+    <string name="browser_menu_desktop_site">Web pre počítače</string>
     <!-- Browser menu toggle that adds a shortcut to the site on the device home screen. -->
     <string name="browser_menu_add_to_homescreen">Pridať na úvodnú obrazovku</string>
     <!-- Browser menu toggle that installs a Progressive Web App shortcut to the site on the device home screen. -->
@@ -292,6 +292,8 @@
     <string name="preferences_theme">Téma vzhľadu</string>
     <!-- Preference for customizing the home screen -->
     <string name="preferences_home">Domov</string>
+    <!-- Preference for gestures based actions -->
+    <string name="preferences_gestures">Gestá</string>
     <!-- Preference for settings related to visual options -->
     <string name="preferences_customize">Prispôsobenie</string>
     <!-- Preference description for banner about signing in -->
@@ -329,6 +331,8 @@
     <!-- Preference for account settings -->
     <string name="preferences_account_settings">Nastavenia účtu</string>
 
+    <!-- Preference for enabling url autocomplete-->
+    <string name="preferences_enable_autocomplete_urls">Automaticky dokončovať URL adresy</string>
     <!-- Preference for open links in third party apps -->
     <string name="preferences_open_links_in_apps">Otvárať odkazy v aplikáciách</string>
 
@@ -433,7 +437,7 @@
 
     <!-- Turn On Sync Preferences -->
     <!-- Header of the Turn on Sync preference view -->
-    <string name="preferences_sync">Zapnite si synchronizáciu</string>
+    <string name="preferences_sync">Zapnúť synchronizáciu</string>
     <!-- Preference for pairing -->
     <string name="preferences_sync_pair">Naskenujte párovací kód zobrazený vo Firefoxe na počítači</string>
     <!-- Preference for account login -->
@@ -1058,10 +1062,6 @@
     <string name="onboarding_account_sign_in_header">S účtom Firefox môžete synchronizovať záložky, históriu prehliadania a omnoho viac.</string>
     <!-- Text for the button to learn more about signing in to your Firefox account -->
     <string name="onboarding_manual_sign_in_learn_more">Ďalšie informácie</string>
-    <!-- text for the firefox account onboarding card header when we detect you're already signed in to
-        another Firefox browser. (The word `Firefox` should not be translated)
-        The first parameter is the email of the detected user's account -->
-    <string name="onboarding_firefox_account_auto_signin_header_2">V inom Firefoxe na tomto telefóne ste prihlásení ako %s. Chceli by ste sa prihlásiť s týmto účtom?</string>
     <!-- text for the button to confirm automatic sign-in -->
     <string name="onboarding_firefox_account_auto_signin_confirm">Prihlásiť sa</string>
     <!-- text for the automatic sign-in button while signing in is in process -->
@@ -1305,9 +1305,6 @@
     <!-- Placeholder text for the TextView in the Add to Homescreen dialog -->
     <string name="add_to_homescreen_text_placeholder">Názov skratky</string>
 
-    <!-- Describes the add to homescreen functionality -->
-    <string name="add_to_homescreen_description">Túto webovú stránku si môžete jednoducho pridať na svoju úvodnú obrazovku a mať tak okamžitý prístup k prehliadaniu.</string>
-
     <!-- Preference for managing the settings for logins and passwords in Fenix -->
     <string name="preferences_passwords_logins_and_passwords">Prihlasovacie údaje</string>
     <!-- Preference for managing the saving of logins and passwords in Fenix -->
@@ -1376,8 +1373,12 @@
     <string name="logins_site_copied">Stránka bola skopírovaná do schránky</string>
     <!-- Content Description (for screenreaders etc) read for the button to copy a password in logins-->
     <string name="saved_logins_copy_password">Kopírovať heslo</string>
+    <!-- Content Description (for screenreaders etc) read for the button to clear a password while editing a login-->
+    <string name="saved_logins_clear_password">Vymazať heslo</string>
     <!-- Content Description (for screenreaders etc) read for the button to copy a username in logins -->
     <string name="saved_login_copy_username">Kopírovať používateľské meno</string>
+    <!-- Content Description (for screenreaders etc) read for the button to clear a username while editing a login -->
+    <string name="saved_login_clear_username">Vymazať používateľské meno</string>
     <!-- Content Description (for screenreaders etc) read for the button to copy a site in logins -->
     <string name="saved_login_copy_site">Kopírovať stránku</string>
     <!-- Content Description (for screenreaders etc) read for the button to open a site in logins -->
@@ -1532,7 +1533,7 @@
     <string name="saved_login_duplicate">Prihlasovacie údaje s týmto používateľským menom už existujú</string>
 
     <!-- Synced Tabs -->
-   <!-- Text displayed to ask user to connect another device as no devices found with account -->
+    <!-- Text displayed to ask user to connect another device as no devices found with account -->
     <string name="synced_tabs_connect_another_device">Pripojiť ďalšie zariadenie.</string>
     <!-- Text displayed asking user to re-authenticate -->
     <string name="synced_tabs_reauth">Prosím, znova overte totožnosť.</string>
@@ -1553,7 +1554,7 @@
     <!-- Title text displayed in the dialog when top sites limit is reached. -->
     <string name="top_sites_max_limit_title">Bol dosiahnutý limit top stránok</string>
     <!-- Content description text displayed in the dialog when top sites limit is reached. -->
-    <string name="top_sites_max_limit_content">Ak chcete pridať novú top stránku, musíte jednu odstrániť. Podržte na nej prst a vyberte možnosť Odstrániť.</string>
+    <string name="top_sites_max_limit_content_2">Ak chcete pridať novú top stránku, musíte jednu odstrániť. Podržte na nej prst a vyberte možnosť Odstrániť.</string>
     <!-- Confirmation dialog button text when top sites limit is reached. -->
     <string name="top_sites_max_limit_confirmation_button">Ok, rozumiem</string>
 
@@ -1563,7 +1564,7 @@
     <!-- Content description for close button in collection placeholder. -->
     <string name="remove_home_collection_placeholder_content_description">Odstrániť</string>
 
-    <!-- depcrecated: text for the firefox account onboarding card header
+    <!-- Deprecated: text for the firefox account onboarding card header
     The first parameter is the name of the app (e.g. Firefox Preview) -->
     <string name="onboarding_firefox_account_header">Využite %s naplno.</string>
 
@@ -1571,4 +1572,9 @@
     <string name="no_collections_header1">Zbierajte veci, na ktorých vám záleží</string>
     <!-- Deprecated: Label to describe what collections are to a new user without any collections -->
     <string name="no_collections_description1">Zoskupte podobné vyhľadávania, weby a karty, aby ste k nim mali rýchly prístup neskôr.</string>
-</resources>
+    <!-- Deprecated: text for the firefox account onboarding card header when we detect you're already signed in to -->
+    <string name="onboarding_firefox_account_auto_signin_header_2">V inom Firefoxe na tomto telefóne ste prihlásení ako %s. Chceli by ste sa prihlásiť s týmto účtom?</string>
+    <!-- Deprecated: Describes the add to homescreen functionality -->
+    <string name="add_to_homescreen_description">Túto webovú stránku si môžete jednoducho pridať na svoju úvodnú obrazovku a mať tak okamžitý prístup k prehliadaniu.</string>
+
+    </resources>

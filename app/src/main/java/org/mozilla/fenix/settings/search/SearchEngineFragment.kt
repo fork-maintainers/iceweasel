@@ -32,6 +32,11 @@ class SearchEngineFragment : PreferenceFragmentCompat() {
                 isChecked = context.settings().shouldShowSearchSuggestions
             }
 
+        val autocompleteURLsPreference =
+            requirePreference<SwitchPreference>(R.string.pref_key_enable_autocomplete_urls).apply {
+                isChecked = context.settings().shouldAutocompleteInAwesomebar
+            }
+
         val searchSuggestionsInPrivatePreference =
             requirePreference<CheckBoxPreference>(R.string.pref_key_show_search_suggestions_in_private).apply {
                 isChecked = context.settings().shouldShowSearchSuggestionsInPrivate
@@ -52,6 +57,11 @@ class SearchEngineFragment : PreferenceFragmentCompat() {
                 isChecked = context.settings().shouldShowBookmarkSuggestions
             }
 
+        val showSyncedTabsSuggestions =
+            requirePreference<SwitchPreference>(R.string.pref_key_search_synced_tabs).apply {
+                isChecked = context.settings().shouldShowSyncedTabsSuggestions
+            }
+
         val showClipboardSuggestions =
             requirePreference<SwitchPreference>(R.string.pref_key_show_clipboard_suggestions).apply {
                 isChecked = context.settings().shouldShowClipboardSuggestions
@@ -70,9 +80,11 @@ class SearchEngineFragment : PreferenceFragmentCompat() {
         showSearchShortcuts.onPreferenceChangeListener = SharedPreferenceUpdater()
         showHistorySuggestions.onPreferenceChangeListener = SharedPreferenceUpdater()
         showBookmarkSuggestions.onPreferenceChangeListener = SharedPreferenceUpdater()
+        showSyncedTabsSuggestions.onPreferenceChangeListener = SharedPreferenceUpdater()
         showClipboardSuggestions.onPreferenceChangeListener = SharedPreferenceUpdater()
         searchSuggestionsInPrivatePreference.onPreferenceChangeListener = SharedPreferenceUpdater()
         showVoiceSearchPreference.onPreferenceChangeListener = SharedPreferenceUpdater()
+        autocompleteURLsPreference.onPreferenceChangeListener = SharedPreferenceUpdater()
 
         searchSuggestionsPreference.setOnPreferenceClickListener {
             if (!searchSuggestionsPreference.isChecked) {

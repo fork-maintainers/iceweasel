@@ -229,7 +229,7 @@ android.applicationVariants.all { variant ->
 
     def isDebug = variant.buildType.resValues['IS_DEBUG']?.value ?: false
     def useReleaseVersioning = variant.buildType.buildConfigFields['USE_RELEASE_VERSIONING']?.value ?: false
-    def versionName = Config.releaseVersionName(project)
+    def versionName = Config.generateDebugVersionName()
 
     println("----------------------------------------------")
     println("Variant name:      " + variant.name)
@@ -422,6 +422,7 @@ dependencies {
     implementation Deps.mozilla_feature_site_permissions
     implementation Deps.mozilla_feature_readerview
     implementation Deps.mozilla_feature_tab_collections
+    implementation Deps.mozilla_feature_recentlyclosed
     implementation Deps.mozilla_feature_top_sites
     implementation Deps.mozilla_feature_share
     implementation Deps.mozilla_feature_accounts_push

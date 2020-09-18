@@ -69,7 +69,7 @@ class SyncedTabsControllerTest {
     }
 
     @Test
-    fun `display synced tabs in reverse`() {
+    fun `display synced tabs in correct order`() {
         val tabs = listOf(
             SyncedDeviceTabs(
                 device = mockk(relaxed = true),
@@ -88,19 +88,19 @@ class SyncedTabsControllerTest {
         assertEquals(4, itemCount)
         assertEquals(
             SyncedTabsViewHolder.TitleViewHolder.LAYOUT_ID,
-            controller.adapter.getItemViewType(itemCount - 1)
+            controller.adapter.getItemViewType(0)
         )
         assertEquals(
             SyncedTabsViewHolder.DeviceViewHolder.LAYOUT_ID,
-            controller.adapter.getItemViewType(itemCount - 2)
+            controller.adapter.getItemViewType(1)
         )
         assertEquals(
             SyncedTabsViewHolder.TabViewHolder.LAYOUT_ID,
-            controller.adapter.getItemViewType(itemCount - 3)
+            controller.adapter.getItemViewType(2)
         )
         assertEquals(
             SyncedTabsViewHolder.TabViewHolder.LAYOUT_ID,
-            controller.adapter.getItemViewType(itemCount - 4)
+            controller.adapter.getItemViewType(3)
         )
     }
 
@@ -128,6 +128,6 @@ class SyncedTabsControllerTest {
 
         store.dispatch(ExitMultiSelectMode).joinBlocking()
 
-        verify { concatAdapter.addAdapter(0, any()) }
+        verify { concatAdapter.addAdapter(any()) }
     }
 }

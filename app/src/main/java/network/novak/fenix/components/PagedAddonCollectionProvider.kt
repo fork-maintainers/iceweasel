@@ -16,7 +16,6 @@ import mozilla.components.concept.fetch.Request
 import mozilla.components.concept.fetch.isSuccess
 import mozilla.components.feature.addons.Addon
 import mozilla.components.feature.addons.AddonsProvider
-import mozilla.components.feature.addons.amo.AddonCollectionProvider
 import mozilla.components.support.base.log.logger.Logger
 import mozilla.components.support.ktx.kotlin.sanitizeURL
 import mozilla.components.support.ktx.util.readAndDeserialize
@@ -359,4 +358,3 @@ internal fun JSONArray.concat(other: JSONArray) {
         put(length(), other.getJSONObject(index))
     }
 }
-

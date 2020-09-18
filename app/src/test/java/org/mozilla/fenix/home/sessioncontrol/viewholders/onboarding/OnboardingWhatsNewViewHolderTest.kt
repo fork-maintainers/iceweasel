@@ -56,7 +56,7 @@ class OnboardingWhatsNewViewHolderTest {
         OnboardingWhatsNewViewHolder(view, interactor)
 
         assertEquals(
-            "Have questions about the redesigned Firefox Preview? Want to know what’s changed?",
+            "Have questions about the redesigned Iceraven Preview? Want to know what’s changed?",
             view.description_text.text
         )
 

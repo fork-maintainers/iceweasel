@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<resources>
+
+    <!-- Label for the secret settings preference -->
+    <string name="preferences_debug_settings">Секретные настройки</string>
+    <!-- Label for the show top frequently visited sites preference -->
+    <string name="preferences_debug_settings_enable_top_frecent_sites">Показать часто посещаемые сайты</string>
+    <!-- Label for the wait until first paint preference -->
+    <string name="preferences_debug_settings_wait_first_paint">Ждать, пока первая заливка не отобразит содержимое страницы</string>
+    <!-- Label for showing Synced Tabs in the tabs tray -->
+    <string name="preferences_debug_synced_tabs_tabs_tray">Показывать синхронизированные вкладки на панели вкладок</string>
+
+    <!-- MP Migration -->
+    <string name="mp_homescreen_tip_title">Ищете свои логины?</string>
+    <string name="mp_homescreen_tip_message">Если у вас был мастер-пароль до обновления Iceraven, вам нужно будет ввести его, чтобы перенести сохранённые логины.</string>
+    <string name="mp_homescreen_button">Введите мастер-пароль</string>
+    <string name="mp_dialog_title_recovery_transfer_saved_logins">Перенести сохранённые логины</string>
+    <string name="mp_dialog_message_recovery_transfer_saved_logins">Введите свой предыдущий мастер-пароль.</string>
+    <string name="mp_dialog_positive_transfer_saved_logins">Продолжить и перенести</string>
+    <string name="mp_dialog_negative_transfer_saved_logins">Отмена</string>
+    <string name="mp_dialog_error_transfer_saved_logins">Неправильный пароль</string>
+    <string name="mp_dialog_title_transfer_success">Перенесено успешно</string>
+    <string name="mp_dialog_message_transfer_success">Ваши сохранённые логины были перенесены в Iceraven.</string>
+    <string name="mp_dialog_positive_transfer_success">Просмотр сохранённых логинов</string>
+    <string name="mp_dialog_close_transfer">Закрыть</string>
+    <string name="mp_dialog_title_transfer_failure">Перенос не удался</string>
+    <string name="mp_dialog_message_transfer_failure">Произошла неизвестная ошибка, невозможно перенести логины.</string>
+</resources>

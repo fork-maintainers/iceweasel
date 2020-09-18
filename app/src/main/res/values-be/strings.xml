@@ -402,6 +402,8 @@
     <!-- Title for experiments preferences -->
     <string name="preference_experiments">Доследы</string>
 
+    <!-- Summary for experiments preferences -->
+    <string name="preference_experiments_summary">Дазваляе Mozilla ўсталёўваць эксперыментальныя функцыі і збіраць звесткі для іх</string>
     <!-- Preference switch for crash reporter -->
     <string name="preferences_crash_reporter">Паведамляльнік пра крахі</string>
     <!-- Preference switch for Mozilla location service -->
@@ -476,6 +478,8 @@
     <!-- Content description (not visible, for screen readers etc.): "Close button for library settings" -->
     <string name="content_description_close_button">Закрыць</string>
 
+    <!-- Option in library for Recently Closed Tabs -->
+    <string name="library_recently_closed_tabs">Нядаўна закрытыя карткі</string>
     <!-- Option in library to open Recently Closed Tabs page -->
     <string name="recently_closed_show_full_history">Паказаць усю гісторыю</string>
     <!-- Text to show users they have multiple tabs saved in the Recently Closed Tabs section of history.
@@ -934,6 +938,9 @@
     <!-- Title for Accessibility Text Automatic Size Scaling Preference -->
     <string name="preference_accessibility_auto_size_2">Аўтаматычны памер шрыфту</string>
 
+    <!-- Summary for Accessibility Text Automatic Size Scaling Preference -->
+    <string name="preference_accessibility_auto_size_summary">Памер шрыфту будзе адпавядаць наладам Android. Адключыце, каб кіраваць шрыфтам тут.</string>
+
     <!-- Title for the Delete browsing data preference -->
     <string name="preferences_delete_browsing_data">Выдаліць дадзеныя аглядання</string>
     <!-- Title for the tabs item in Delete browsing data -->
@@ -1184,6 +1191,8 @@
     <string name="etp_cryptominers_title">Майнеры крыптавалют</string>
     <!-- Category of trackers (fingerprinters) that can be blocked by Enhanced Tracking Protection -->
     <string name="etp_fingerprinters_title">Збіральнікі лічбавых адбіткаў</string>
+    <!-- Description of fingerprinters that can be blocked by Enhanced Tracking Protection -->
+    <string name="etp_fingerprinters_description">Спыняе збор унікальнай ідэнтыфікацыйнай інфармацыі пра вашу прыладу, якая можа быць выкарыстана для сачэння.</string>
     <!-- Category of trackers (tracking content) that can be blocked by Enhanced Tracking Protection -->
     <string name="etp_tracking_content_title">Змест з элементамі сачэння</string>
     <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
@@ -1222,6 +1231,9 @@
     <!-- About page link text to open a screen with libraries that are used -->
     <string name="about_other_open_source_libraries">Бібліятэкі, якімі мы карыстаемся</string>
 
+    <!-- Toast shown to the user when they are activating the secret dev menu
+        The first parameter is number of long clicks left to enable the menu -->
+    <string name="about_debug_menu_toast_progress">Меню адладкі: %1$d націсканняў да ўключэння</string>
     <string name="about_debug_menu_toast_done">Меню адладкі ўключана</string>
 
     <!-- Content description of the tab counter toolbar button when one tab is open -->
@@ -1354,6 +1366,9 @@
     <!-- Saved logins sorting strategy menu item -by last used- (if selected, it will sort saved logins by last used) -->
     <string name="saved_logins_sort_strategy_last_used">Апошняе выкарыстанне</string>
 
+    <!-- Content description (not visible, for screen readers etc.): Sort saved logins dropdown menu chevron icon -->
+    <string name="saved_logins_menu_dropdown_chevron_icon_content_description">Меню сартавання лагінаў</string>
+
     <!-- Title of the Add search engine screen -->
     <string name="search_engine_add_custom_search_engine_title">Дадаць пашукавік</string>
     <!-- Title of the Edit search engine screen -->
@@ -1385,6 +1400,8 @@
     <!-- Text shown when a user leaves the name field empty -->
     <string name="search_add_custom_engine_error_empty_name">Увядзіце назву пошукавай сістэмы</string>
 
+    <!-- Text shown when a user tries to add a search engine that already exists -->
+    <string name="search_add_custom_engine_error_existing_name">Пашукавік з назваю “%s” ужо існуе.</string>
     <!-- Text shown when a user leaves the search string field empty -->
     <string name="search_add_custom_engine_error_empty_search_string">Увядзіце радок пошуку</string>
 
@@ -1435,6 +1452,8 @@
     <string name="confirm_clear_permission_site">Ці ўпэўнены, што хочаце выдаліць гэты дазвол для гэтага сайта?</string>
     <!-- label shown when there are not site exceptions to show in the site exception settings -->
     <string name="no_site_exceptions">Няма выняткаў для сайта</string>
+    <!-- Label for the Pocket default top site -->
+    <string name="pocket_top_articles">Папулярныя артыкулы</string>
     <!-- Bookmark deletion confirmation -->
     <string name="bookmark_deletion_confirmation">Ці ўпэўнены Вы, што хочаце выдаліць гэту закладку?</string>
     <!-- Browser menu button that adds a top site to the home fragment -->
@@ -1451,6 +1470,8 @@
     <string name="login_deletion_confirmation">Вы сапраўды хочаце выдаліць гэтае лагін?</string>
     <!-- Positive action of a dialog asking to delete  -->
     <string name="dialog_delete_positive">Выдаліць</string>
+    <!--  The saved login options menu description. -->
+    <string name="login_options_menu">Налады лагіна</string>
     <!--  The editable text field for a login's web address. -->
     <string name="saved_login_hostname_description">Тэкставае поле для рэдагавання вэб-адраса для ўваходу ў сістэму.</string>
     <!--  The editable text field for a login's username. -->
@@ -1474,13 +1495,15 @@
     <string name="saved_login_duplicate">Лагін з такім імем карыстальніка ўжо існуе</string>
 
     <!-- Synced Tabs -->
-   <!-- Text displayed to ask user to connect another device as no devices found with account -->
+    <!-- Text displayed to ask user to connect another device as no devices found with account -->
     <string name="synced_tabs_connect_another_device">Падключыць іншую прыладу.</string>
 
     <!-- Text displayed asking user to re-authenticate -->
     <string name="synced_tabs_reauth">Калі ласка, аўтарызуйцеся яшчэ раз.</string>
     <!-- Text displayed when user has disabled tab syncing in Firefox Sync Account -->
     <string name="synced_tabs_enable_tab_syncing">Калі ласка, уключыце сінхранізацыю картак.</string>
+    <!-- Text displayed when user has no tabs that have been synced -->
+    <string name="synced_tabs_no_tabs">На іншых вашых прыладах у Firefox не адкрыта ніводнай карткі.</string>
     <!-- Text displayed in the synced tabs screen when a user is not signed in to Firefox Sync describing Synced Tabs -->
     <string name="synced_tabs_sign_in_message">Пабачыць спіс картак з іншых прылад.</string>
     <!-- Text displayed on a button in the synced tabs screen to link users to sign in when a user is not signed in to Firefox Sync -->
@@ -1489,6 +1512,9 @@
     <!-- The text displayed when a synced device has no tabs to show in the list of Synced Tabs. -->
     <string name="synced_tabs_no_open_tabs">Няма адкрытых картак</string>
 
+    <!-- Top Sites -->
+    <!-- Title text displayed in the dialog when top sites limit is reached. -->
+    <string name="top_sites_max_limit_title">Дасягнуты ліміт папулярных сайтаў</string>
     <!-- Confirmation dialog button text when top sites limit is reached. -->
     <string name="top_sites_max_limit_confirmation_button">OK, зразумела</string>
 
@@ -1498,7 +1524,7 @@
     <!-- Content description for close button in collection placeholder. -->
     <string name="remove_home_collection_placeholder_content_description">Выдаліць</string>
 
-    <!-- depcrecated: text for the firefox account onboarding card header
+    <!-- Deprecated: text for the firefox account onboarding card header
     The first parameter is the name of the app (e.g. Firefox Preview) -->
     <string name="onboarding_firefox_account_header">Атрымайце максімум ад %s.</string>
 
@@ -1506,4 +1532,6 @@
     <string name="no_collections_header1">Збірайце важныя для вас рэчы</string>
     <!-- Deprecated: Label to describe what collections are to a new user without any collections -->
     <string name="no_collections_description1">Групуйце падобныя пошукі, сайты і карткі для хуткага доступу.</string>
+    <!-- Deprecated: text for the firefox account onboarding card header when we detect you're already signed in to -->
+    <string name="onboarding_firefox_account_auto_signin_header_2">Вы ўвайшлі як %s у іншым браўзеры Firefox на гэтым тэлефоне. Ці хочаце аўтарызавацца з дапамогай гэтага ўліковага запісу?</string>
     </resources>

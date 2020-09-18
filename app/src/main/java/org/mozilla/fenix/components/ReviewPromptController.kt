@@ -7,8 +7,6 @@ package org.mozilla.fenix.components
 import android.app.Activity
 import android.content.Context
 import androidx.annotation.VisibleForTesting
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.withContext
 import org.mozilla.fenix.utils.Settings
 
 /**

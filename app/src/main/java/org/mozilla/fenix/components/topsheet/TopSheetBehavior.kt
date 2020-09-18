@@ -1,23 +1,8 @@
-package org.mozilla.fenix.components.topsheet
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-import android.animation.ValueAnimator
-import android.content.Context
-import android.os.Parcel
-import android.os.Parcelable
-import android.util.AttributeSet
-import android.util.TypedValue
-import android.view.*
-import androidx.annotation.IntDef
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.view.NestedScrollingChild
-import androidx.core.view.ViewCompat
-import androidx.customview.widget.ViewDragHelper
-import com.google.android.material.R
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.shape.MaterialShapeDrawable
-import com.google.android.material.shape.ShapeAppearanceModel
-import java.lang.ref.WeakReference
-import kotlin.math.abs
+/* Added the Mozilla Public License above to avoid failing detekt rule */
 
 /*
 * Copyright (C) 2015 The Android Open Source Project
@@ -33,33 +18,59 @@ import kotlin.math.abs
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the License for the specific language governing permissions and
 * limitations under the License.
-*/ /**
+*/
+
+package org.mozilla.fenix.components.topsheet
+
+import android.animation.ValueAnimator
+import android.content.Context
+import android.os.Parcel
+import android.os.Parcelable
+import android.util.AttributeSet
+import android.util.TypedValue
+import android.view.AbsSavedState
+import android.view.MotionEvent
+import android.view.VelocityTracker
+import android.view.View
+import android.view.ViewConfiguration
+import android.view.ViewGroup
+import androidx.annotation.IntDef
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.NestedScrollingChild
+import androidx.core.view.ViewCompat
+import androidx.customview.widget.ViewDragHelper
+import com.google.android.material.R
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.shape.ShapeAppearanceModel
+import java.lang.ref.WeakReference
+import kotlin.math.abs
+
+/**
  * An interaction behavior plugin for a child view of [CoordinatorLayout] to make it work as
  * a top sheet.
  */
+@Suppress("TooManyFunctions", "LargeClass")
 class TopSheetBehavior<V : View?>
 /**
  * Default constructor for inflating TopSheetBehaviors from layout.
  *
  * @param context The [Context].
- * @param attrs   The [AttributeSet].
+ * @param attrs The [AttributeSet].
  */(context: Context, attrs: AttributeSet?) : CoordinatorLayout.Behavior<V>(context, attrs) {
     /**
      * Callback for monitoring events about top sheets.
      */
-    abstract class TopSheetCallback {
+    interface TopSheetCallback {
         /**
          * Called when the top sheet changes its state.
          *
          * @param topSheet The top sheet view.
-         * @param newState    The new state. This will be one of [.STATE_DRAGGING],
+         * @param newState The new state. This will be one of [.STATE_DRAGGING],
          * [.STATE_SETTLING], [.STATE_EXPANDED],
          * [.STATE_COLLAPSED], or [.STATE_HIDDEN].
          */
-        abstract fun onStateChanged(
-            topSheet: View,
-            @State newState: Int
-        )
+        fun onStateChanged(topSheet: View, @State newState: Int)
 
         /**
          * Called when the top sheet is being dragged.
@@ -67,13 +78,9 @@ class TopSheetBehavior<V : View?>
          * @param topSheet The top sheet view.
          * @param slideOffset The new offset of this top sheet within its range, from 0 to 1
          * when it is moving upward, and from 0 to -1 when it moving downward.
-         * @param isOpening   detect showing
+         * @param isOpening detect showing
          */
-        abstract fun onSlide(
-            topSheet: View,
-            slideOffset: Float,
-            isOpening: Boolean?
-        )
+        fun onSlide(topSheet: View, slideOffset: Float, isOpening: Boolean?)
     }
 
     /**
@@ -148,7 +155,7 @@ class TopSheetBehavior<V : View?>
             a.hasValue(R.styleable.BottomSheetBehavior_Layout_shapeAppearance)
         createMaterialShapeDrawable(context, attrs!!)
         createShapeValueAnimator()
-        peekHeight = context.resources.displayMetrics.heightPixels * 3 / 4
+        peekHeight = context.resources.displayMetrics.heightPixels * PEEK_HEIGHT_RATIO
         isHideable = a.getBoolean(
             R.styleable.BottomSheetBehavior_Layout_behavior_hideable,
             false
@@ -188,6 +195,7 @@ class TopSheetBehavior<V : View?>
         }
     }
 
+    @Suppress("ComplexMethod")
     override fun onLayoutChild(
         parent: CoordinatorLayout,
         child: V,
@@ -238,6 +246,7 @@ class TopSheetBehavior<V : View?>
         return true
     }
 
+    @Suppress("ComplexMethod", "ReturnCount")
     override fun onInterceptTouchEvent(
         parent: CoordinatorLayout,
         child: V,
@@ -306,7 +315,7 @@ class TopSheetBehavior<V : View?>
             return true
         }
         if (mViewDragHelper != null) {
-            //no crash
+            // no crash
             mViewDragHelper!!.processTouchEvent(event)
             // Record the velocity
             if (action == MotionEvent.ACTION_DOWN) {
@@ -318,13 +327,12 @@ class TopSheetBehavior<V : View?>
             mVelocityTracker!!.addMovement(event)
             // The ViewDragHelper tries to capture only the top-most View. We have to explicitly tell it
             // to capture the top sheet in case it is not captured and the touch slop is passed.
-            if (action == MotionEvent.ACTION_MOVE && !mIgnoreEvents) {
-                if (abs(mInitialY - event.y) > mViewDragHelper!!.touchSlop) {
-                    mViewDragHelper!!.captureChildView(
-                        child,
-                        event.getPointerId(event.actionIndex)
-                    )
-                }
+            if (action == MotionEvent.ACTION_MOVE && !mIgnoreEvents &&
+                    abs(mInitialY - event.y) > mViewDragHelper!!.touchSlop) {
+                mViewDragHelper!!.captureChildView(
+                    child,
+                    event.getPointerId(event.actionIndex)
+                )
             }
         }
         return !mIgnoreEvents
@@ -343,8 +351,12 @@ class TopSheetBehavior<V : View?>
     }
 
     override fun onNestedPreScroll(
-        coordinatorLayout: CoordinatorLayout, child: V, target: View, dx: Int,
-        dy: Int, consumed: IntArray
+        coordinatorLayout: CoordinatorLayout,
+        child: V,
+        target: View,
+        dx: Int,
+        dy: Int,
+        consumed: IntArray
     ) {
         val scrollingChild = mNestedScrollingChildRef!!.get()
         if (target !== scrollingChild) {
@@ -430,8 +442,11 @@ class TopSheetBehavior<V : View?>
     }
 
     override fun onNestedPreFling(
-        coordinatorLayout: CoordinatorLayout, child: V, target: View,
-        velocityX: Float, velocityY: Float
+        coordinatorLayout: CoordinatorLayout,
+        child: V,
+        target: View,
+        velocityX: Float,
+        velocityY: Float
     ): Boolean {
         return target === mNestedScrollingChildRef!!.get() &&
                 (mState != STATE_EXPANDED ||
@@ -466,9 +481,9 @@ class TopSheetBehavior<V : View?>
             }
             if (mViewRef == null) {
                 // The view is not laid out yet; modify mState and let onLayoutChild handle it later
-                if (state == STATE_COLLAPSED || state == STATE_EXPANDED ||
-                    isHideable && state == STATE_HIDDEN
-                ) {
+                val stateCondition = state == STATE_COLLAPSED || state == STATE_EXPANDED ||
+                        isHideable && state == STATE_HIDDEN
+                if (stateCondition) {
                     mState = state
                 }
                 return
@@ -509,6 +524,7 @@ class TopSheetBehavior<V : View?>
         }
     }
 
+    @Suppress("NestedBlockDepth")
     private fun updateDrawableForTargetState(@BottomSheetBehavior.State state: Int) {
         if (state == BottomSheetBehavior.STATE_SETTLING) {
             // Special case: we want to know which state we're settling to, so wait for another call.
@@ -567,11 +583,12 @@ class TopSheetBehavior<V : View?>
 
     private val yVelocity: Float
         get() {
-            mVelocityTracker!!.computeCurrentVelocity(1000, mMaximumVelocity)
+            mVelocityTracker!!.computeCurrentVelocity(VELOCITY_UNITS, mMaximumVelocity)
             return mVelocityTracker!!.getYVelocity(mActivePointerId)
         }
 
     private val mDragCallback: ViewDragHelper.Callback = object : ViewDragHelper.Callback() {
+        @Suppress("ReturnCount")
         override fun tryCaptureView(
             child: View,
             pointerId: Int
@@ -709,7 +726,6 @@ class TopSheetBehavior<V : View?>
         }
     }
 
-
     private fun dispatchOnSlide(top: Int) {
         val topSheet: View? = mViewRef!!.get()
         if (topSheet != null && mCallback != null) {
@@ -742,7 +758,6 @@ class TopSheetBehavior<V : View?>
                 setStateInternal(mTargetState)
             }
         }
-
     }
 
     private class SavedState(superState: Parcelable?, @State val state: Int) :
@@ -806,5 +821,7 @@ class TopSheetBehavior<V : View?>
         private const val CORNER_ANIMATION_DURATION = 500
         private val DEF_STYLE_RES = R.style.Widget_Design_BottomSheet_Modal
 
+        private const val PEEK_HEIGHT_RATIO = 3 / 4
+        private const val VELOCITY_UNITS = 1000
     }
 }

@@ -56,12 +56,12 @@ enum class ReleaseChannel {
      */
     val isFenix: Boolean
         get() = !isFennec
-        
+
     /**
      * Is this a rebranded fork?
      */
     val isFork: Boolean
-        get() =  when (this) {
+        get() = when (this) {
             ForkDebug -> true
             ForkRelease -> true
             else -> false

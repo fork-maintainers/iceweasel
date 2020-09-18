@@ -34,12 +34,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import mozilla.components.feature.addons.Addon
 import mozilla.components.feature.addons.R
-import mozilla.components.feature.addons.amo.AddonCollectionProvider
 import mozilla.components.feature.addons.ui.translatedName
 import mozilla.components.support.base.log.logger.Logger
 import mozilla.components.support.ktx.android.content.appName
 import mozilla.components.support.ktx.android.content.res.resolveAttribute
-import network.novak.fenix.components.PagedAddonCollectionProvider
 import java.io.IOException
 
 @VisibleForTesting internal const val KEY_INSTALLED_ADDON = "KEY_ADDON"
@@ -65,7 +63,7 @@ class PagedAddonInstallationDialogFragment : AppCompatDialogFragment() {
     var onConfirmButtonClicked: ((Addon, Boolean) -> Unit)? = null
 
     /**
-     * Reference to the application's [AddonCollectionProvider] to fetch add-on icons.
+     * Reference to the application's [PagedAddonCollectionProvider] to fetch add-on icons.
      */
     var addonCollectionProvider: PagedAddonCollectionProvider? = null
 

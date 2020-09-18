@@ -771,20 +771,35 @@ abstract class BaseBrowserFragment : Fragment(), UserInteractionHandler, Session
     }
 
     private fun initializeEngineView(toolbarHeight: Int) {
-        engineView.setDynamicToolbarMaxHeight(toolbarHeight)
-
         val context = requireContext()
-        val behavior = when (context.settings().toolbarPosition) {
-            ToolbarPosition.BOTTOM -> EngineViewBottomBehavior(context, null)
-            ToolbarPosition.TOP -> SwipeRefreshScrollingViewBehavior(
-                context,
-                null,
-                engineView,
-                browserToolbarView
-            )
-        }
 
-        (swipeRefresh.layoutParams as CoordinatorLayout.LayoutParams).behavior = behavior
+        if (context.settings().isDynamicToolbarEnabled) {
+            engineView.setDynamicToolbarMaxHeight(toolbarHeight)
+
+            val behavior = when (context.settings().toolbarPosition) {
+                // Set engineView dynamic vertical clipping depending on the toolbar position.
+                ToolbarPosition.BOTTOM -> EngineViewBottomBehavior(context, null)
+                // Set scroll flags depending on if if the browser or the website is doing the scroll.
+                ToolbarPosition.TOP -> SwipeRefreshScrollingViewBehavior(
+                    context,
+                    null,
+                    engineView,
+                    browserToolbarView
+                )
+            }
+
+            (swipeRefresh.layoutParams as CoordinatorLayout.LayoutParams).behavior = behavior
+        } else {
+            // Ensure webpage's bottom elements are aligned to the very bottom of the engineView.
+            engineView.setDynamicToolbarMaxHeight(0)
+
+            // Effectively place the engineView on top of the toolbar if that is not dynamic.
+            if (context.settings().shouldUseBottomToolbar) {
+                val browserEngine = swipeRefresh.layoutParams as CoordinatorLayout.LayoutParams
+                browserEngine.bottomMargin =
+                    requireContext().resources.getDimensionPixelSize(R.dimen.browser_toolbar_height)
+            }
+        }
     }
 
     /**
@@ -916,14 +931,13 @@ abstract class BaseBrowserFragment : Fragment(), UserInteractionHandler, Session
      */
     protected open fun removeSessionIfNeeded(): Boolean {
         getSessionById()?.let { session ->
-            val sessionManager = requireComponents.core.sessionManager
             return if (session.source == SessionState.Source.ACTION_VIEW) {
                 activity?.finish()
-                sessionManager.remove(session)
+                requireComponents.useCases.tabsUseCases.removeTab(session)
                 true
             } else {
                 if (session.hasParentSession) {
-                    sessionManager.remove(session, true)
+                    requireComponents.useCases.tabsUseCases.removeTab(session)
                 }
                 // We want to return to home if this session didn't have a parent session to select.
                 val goToOverview = !session.hasParentSession
@@ -1099,7 +1113,7 @@ abstract class BaseBrowserFragment : Fragment(), UserInteractionHandler, Session
             if (webAppToolbarShouldBeVisible) {
                 browserToolbarView.view.isVisible = true
                 val toolbarHeight = resources.getDimensionPixelSize(R.dimen.browser_toolbar_height)
-                engineView.setDynamicToolbarMaxHeight(toolbarHeight)
+                initializeEngineView(toolbarHeight)
             }
         }
     }

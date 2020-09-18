@@ -8,9 +8,6 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.onboarding_tabs_tray_layout.view.*
 import org.mozilla.fenix.R
-import org.mozilla.fenix.components.metrics.Event
-import org.mozilla.fenix.components.metrics.Event.OnboardingTrackingProtection.Setting
-import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.settings
 import org.mozilla.fenix.onboarding.OnboardingRadioButton
 import org.mozilla.fenix.utils.view.addToRadioGroup
@@ -44,7 +41,6 @@ class OnboardingTabsTrayLayoutViewHolder(view: View) : RecyclerView.ViewHolder(v
             reverseTabOrderInTabsTray = !enabled
             useNewTabFloatingActionButton = !enabled
             placeNewTabFloatingActionButtonAtTop = false
-
         }
     }
 

@@ -6,11 +6,8 @@ script:
   - echo "8933bad161af4178b1185d1a37fbf41ea5269c55" | sudo tee -a /usr/local/android-sdk/licenses/android-sdk-license
   - echo "d56f5187479451eabf01fb78af6dfcb131a6481e" | sudo tee -a /usr/local/android-sdk/licenses/android-sdk-license
   - echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" | sudo tee -a /usr/local/android-sdk/licenses/android-sdk-license
-  # Run tests but don't complain just because some fail.
-  # TODO: Change this once we get all the tests passing.
-  - (./gradlew -q testDebug 2>&1 || true) | tee testlog.txt
-  # Fail if more tests fail than we think should
-  - '[[ $(cat testlog.txt | grep ''tests completed'' | sed ''s/.* \([0-9]*\) failed.*/\1/g'') -le 5 ]]'
+  # Run tests
+  - ./gradlew -q testDebug 2>&1
   # Make sure a release build builds
   - ./gradlew assembleForkRelease -PversionName="$(git describe --tags HEAD)"
   

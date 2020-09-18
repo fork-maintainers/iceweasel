@@ -10,7 +10,11 @@ import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
-import androidx.preference.*
+import androidx.preference.EditTextPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreference
 import org.mozilla.fenix.FeatureFlags
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.metrics.Event
@@ -25,7 +29,7 @@ import org.mozilla.fenix.utils.view.addToRadioGroup
  * Lets the user customize the UI.
  */
 
-@Suppress("TooManyFunctions")
+@Suppress("LargeClass", "TooManyFunctions")
 class CustomizationFragment : PreferenceFragmentCompat() {
     private lateinit var radioLightTheme: RadioButtonPreference
     private lateinit var radioDarkTheme: RadioButtonPreference
@@ -154,7 +158,8 @@ class CustomizationFragment : PreferenceFragmentCompat() {
             onPreferenceChangeListener = SharedPreferenceUpdater()
         }
 
-        val reverseOrderPref = requirePreference<SwitchPreference>(R.string.pref_key_tabs_tray_reverse_tab_order).apply {
+        val reverseOrderPref = requirePreference<SwitchPreference>(
+                R.string.pref_key_tabs_tray_reverse_tab_order).apply {
             if (context.settings().enableCompactTabs) {
                 isChecked = false
                 isEnabled = false
@@ -210,8 +215,6 @@ class CustomizationFragment : PreferenceFragmentCompat() {
                 true
             }
         }
-
-
     }
 
     private fun setupHomeCategory() {
@@ -240,7 +243,6 @@ class CustomizationFragment : PreferenceFragmentCompat() {
             isChecked = context.settings().isSwipeToolbarToSwitchTabsEnabled
             onPreferenceChangeListener = SharedPreferenceUpdater()
         }
-
     }
 
     private fun setupAddonsCustomizationCategory() {
@@ -253,6 +255,5 @@ class CustomizationFragment : PreferenceFragmentCompat() {
             text = context.settings().customAddonsCollection
             onPreferenceChangeListener = SharedPreferenceUpdater()
         }
-
     }
 }

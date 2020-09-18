@@ -148,7 +148,7 @@ class TabTrayView(
         if (!isTabsTrayFullScreenMode) {
             if (useTopTabsTray) {
                 (behavior as TopSheetBehavior).setTopSheetCallback(object :
-                    TopSheetBehavior.TopSheetCallback() {
+                    TopSheetBehavior.TopSheetCallback {
                     override fun onSlide(topSheet: View, slideOffset: Float, isOpening: Boolean?) {
                         if (interactor.onModeRequested() is Mode.Normal && useFab) {
                             if (slideOffset >= SLIDE_OFFSET) {
@@ -262,14 +262,9 @@ class TabTrayView(
                     concatAdapter.addAdapter(syncedTabsController.adapter)
                 }
 
-                // Disabling the following block of code because it causes a crash when
-                // accessibility services are enabled! `notifyDataSetChanged()` is incompatible
-                // with concatAdapter. See: https://github.com/mozilla-mobile/fenix/issues/14540
-                // WARNING: Merging the upstream fix for this will cause lot of conflicts!
-                //
-                // if (hasAccessibilityEnabled) {
-                //    tabsAdapter.notifyItemRangeChanged(0, tabs.size)
-                // }
+                if (hasAccessibilityEnabled) {
+                    tabsAdapter.notifyItemRangeChanged(0, tabs.size)
+                }
 
                 if (!hasLoaded) {
                     hasLoaded = true
@@ -302,6 +297,7 @@ class TabTrayView(
                     is TabTrayItemMenu.Item.CloseAllTabs -> interactor.onCloseAllTabsClicked(
                         isPrivateModeSelected
                     )
+                    is TabTrayItemMenu.Item.OpenRecentlyClosed -> interactor.onOpenRecentlyClosedClicked()
                 }
             }
 
@@ -325,7 +321,7 @@ class TabTrayView(
     private fun gridViewNumberOfCols(context: Context): Int {
         val displayMetrics = context.resources.displayMetrics
         val dpWidth = displayMetrics.widthPixels / displayMetrics.density
-        val columnWidthDp = 190
+        val columnWidthDp = COLUMN_WIDTH_DP
         val columnCount = (dpWidth / columnWidthDp).toInt()
         return if (columnCount >= 2) columnCount else 2
     }
@@ -363,41 +359,51 @@ class TabTrayView(
     }
 
     fun updateTabsTrayLayout() {
+        if (enableCompactTabs) {
+            setupCompactTabsTrayLayout()
+        } else {
+            setupRegularTabsTrayLayout()
+        }
+    }
+
+    private fun setupCompactTabsTrayLayout() {
         view.tabsTray.apply {
-            if (enableCompactTabs) {
-                val gridLayoutManager = GridLayoutManager(container.context, gridViewNumberOfCols(container.context))
-                if (useTopTabsTray) {
-                    gridLayoutManager.reverseLayout = true
-                }
-                gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                    override fun getSpanSize(position: Int): Int {
-                        val numTabs = tabsAdapter.itemCount
-                        return if (position < numTabs) {
-                            1
-                        } else {
-                            gridViewNumberOfCols(container.context)
-                        }
-                    }
-                }
-
-                layoutManager = gridLayoutManager
-            } else {
-                val linearLayoutManager = LinearLayoutManager(container.context)
-                if (useTopTabsTray) {
-                    if (!reverseTabOrderInTabsTray) {
-                        linearLayoutManager.reverseLayout = true
-                    } else {
-                        linearLayoutManager.stackFromEnd = true
-                    }
-                } else {
-                    if (reverseTabOrderInTabsTray) {
-                        linearLayoutManager.reverseLayout = true
-                        linearLayoutManager.stackFromEnd = true
-                    }
-                }
-
-                layoutManager = linearLayoutManager
+            val gridLayoutManager = GridLayoutManager(container.context, gridViewNumberOfCols(container.context))
+            if (useTopTabsTray) {
+                gridLayoutManager.reverseLayout = true
             }
+            gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    val numTabs = tabsAdapter.itemCount
+                    return if (position < numTabs) {
+                        1
+                    } else {
+                        gridViewNumberOfCols(container.context)
+                    }
+                }
+            }
+
+            layoutManager = gridLayoutManager
+        }
+    }
+
+    private fun setupRegularTabsTrayLayout() {
+        view.tabsTray.apply {
+            val linearLayoutManager = LinearLayoutManager(container.context)
+            if (useTopTabsTray) {
+                if (!reverseTabOrderInTabsTray) {
+                    linearLayoutManager.reverseLayout = true
+                } else {
+                    linearLayoutManager.stackFromEnd = true
+                }
+            } else {
+                if (reverseTabOrderInTabsTray) {
+                    linearLayoutManager.reverseLayout = true
+                    linearLayoutManager.stackFromEnd = true
+                }
+            }
+
+            layoutManager = linearLayoutManager
         }
     }
 
@@ -733,6 +739,7 @@ class TabTrayView(
         private const val NORMAL_TOP_MARGIN = 8
         private const val NORMAL_BOTTOM_MARGIN = 8
         private const val NORMAL_HANDLE_PERCENT_WIDTH = 0.1F
+        private const val COLUMN_WIDTH_DP = 190
     }
 }
 
@@ -747,6 +754,7 @@ class TabTrayItemMenu(
         object OpenTabSettings : Item()
         object SaveToCollection : Item()
         object CloseAllTabs : Item()
+        object OpenRecentlyClosed : Item()
     }
 
     val menuBuilder by lazy { BrowserMenuBuilder(menuItems) }
@@ -774,6 +782,13 @@ class TabTrayItemMenu(
                 textColorResource = R.color.primary_text_normal_theme
             ) {
                 onItemTapped.invoke(Item.OpenTabSettings)
+            },
+
+            SimpleBrowserMenuItem(
+                context.getString(R.string.tab_tray_menu_recently_closed),
+                textColorResource = R.color.primary_text_normal_theme
+            ) {
+                onItemTapped.invoke(Item.OpenRecentlyClosed)
             },
 
             SimpleBrowserMenuItem(

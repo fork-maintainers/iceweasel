@@ -92,6 +92,7 @@ class BrowserToolbarView(
 
         with(container.context) {
             val sessionManager = components.core.sessionManager
+            val isPinningSupported = components.useCases.webAppUseCases.isPinningSupported()
 
             if (toolbarPosition == ToolbarPosition.TOP) {
                 val offsetChangedListener =
@@ -178,7 +179,8 @@ class BrowserToolbarView(
                     lifecycleOwner = lifecycleOwner,
                     sessionManager = sessionManager,
                     store = components.core.store,
-                    bookmarksStorage = bookmarkStorage
+                    bookmarksStorage = bookmarkStorage,
+                    isPinningSupported = isPinningSupported
                 )
                 view.display.setMenuDismissAction {
                     view.invalidateActions()
@@ -232,8 +234,12 @@ class BrowserToolbarView(
     fun setScrollFlags(shouldDisableScroll: Boolean = false) {
         when (settings.toolbarPosition) {
             ToolbarPosition.BOTTOM -> {
-                (view.layoutParams as? CoordinatorLayout.LayoutParams)?.apply {
-                    behavior = BrowserToolbarBottomBehavior(view.context, null)
+                if (settings.isDynamicToolbarEnabled) {
+                    (view.layoutParams as? CoordinatorLayout.LayoutParams)?.apply {
+                        behavior = BrowserToolbarBottomBehavior(view.context, null)
+                    }
+                } else {
+                    expand()
                 }
             }
             ToolbarPosition.TOP -> {
