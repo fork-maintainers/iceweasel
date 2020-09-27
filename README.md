@@ -86,6 +86,13 @@ Developers are especially welcome, wanted, and needed.
 
 We encourage you to participate in this open source project. We love Pull Requests, Bug Reports, ideas, (security) code reviews or any other kind of positive contribution.
 
+### How to skip CI checks for PRs
+
+If you want to skip Github CI checks in a PR, please add the following to the PR title exactly: `[skip ci]`.
+Also, please include the exact phrase `[skip ci]` in every commit message. This is to avoid Travis CI checks as well as skipping Github CI checks after merging the commits to the `fork` branch.
+
+This is useful to do **if** you are sure that your changes do not effect the app's code (ex: changes to `README.md`).
+
 ## I want to file an issue!
 
 Great! We encourage you to participate in this open source project. We love Pull Requests, Bug Reports, ideas, (security) code reviews or any other kind of positive contribution.
