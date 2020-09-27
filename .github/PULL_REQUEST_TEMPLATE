@@ -7,7 +7,9 @@
 - [ ] **Accessibility**: The code in this PR follows [accessibility best practices](https://github.com/mozilla-mobile/shared-docs/blob/master/android/accessibility_guide.md) or does not include any user facing features. In addition, it includes a screenshot of a successful [accessibility scan](https://play.google.com/store/apps/details?id=com.google.android.apps.accessibility.auditor&hl=en_US) to ensure no new defects are added to the product.
 
 ### To download an APK when reviewing a PR:
-1. click on Show All Checks,
-2. click Details next to "Taskcluster (pull_request)" after it appears and then finishes with a green checkmark,
-3. click on the "Fenix - assemble" task, then click "Run Artifacts".
-4. the APK links should be on the left side of the screen, named for each CPU architecture
+The PR runs an Android build check (`run-build`) that builds a `forkRelease` variant of the app. If it succeeds, then we upload the apks (signed with debug keys) via Github actions.
+We also generate a comment with some instructions and a link to help you find the downloads. You can also follow the instructions below:
+1. Click Details next to "run-build (pull_request_target)" after it finishes with a green checkmark.
+2. Click the "Artifacts" drop-down near the top right of the page.
+3. The apk links should be present in the drop-down menu. You can click on the suitable CPU architecture to download a zipped apk file.
+4. Unzip the file and install the apk.
