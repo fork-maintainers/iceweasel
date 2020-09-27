@@ -1,5 +1,7 @@
 # Iceraven Browser! [![Build Status](https://travis-ci.org/fork-maintainers/iceraven-browser.svg?branch=fork)](https://travis-ci.org/fork-maintainers/iceraven-browser) ![Android build](https://github.com/fork-maintainers/iceraven-browser/workflows/Android%20build/badge.svg)
 
+Trivial change
+
 Definitely not brought to you by Mozilla!
 
 Iceraven Browser is a web browser for Android, based on [Mozilla's Fenix version of Firefox](https://github.com/mozilla-mobile/fenix/), [GeckoView](https://mozilla.github.io/geckoview/) and [Mozilla Android Components](https://mozac.org/).
