@@ -1,0 +1,94 @@
+name: Release Automation
+on:
+  create:
+jobs:
+  release-automation:
+    name: Create Release
+    runs-on: ubuntu-latest
+    if: "contains(toJSON(github.event.ref_type), 'tag') && contains(toJSON(github.event.ref), 'iceraven')"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Create local.properties (to sign release apk with debug keys)
+        run: echo "autosignReleaseWithDebugKey=" >local.properties
+      - name: Build forkRelease variant of app
+        uses: eskatos/gradle-command-action@v1
+        with:
+          wrapper-cache-enabled: true
+          dependencies-cache-enabled: true
+          configuration-cache-enabled: true
+          arguments: assembleForkRelease -PversionName="$(git describe --tags HEAD)"
+      - name: Create changelog
+        run: |
+          PREVIOUS_RELEASE_TAG=$(git tag --list iceraven-* --sort=-creatordate | tail -n+2 | head -n 1)
+
+          echo "## Automated release of version ${{ github.event.ref }} browser" >>temp_changelog.md
+          echo " " >>temp_changelog.md
+          echo "This is an automated release, consisting of the following changes:" >>temp_changelog.md
+          echo "### Change log (commit history since previous release)" >>temp_changelog.md
+          echo " " >>temp_changelog.md
+          git log ${{ github.event.ref }}...$PREVIOUS_RELEASE_TAG --pretty='format:%C(auto)%h (%as) %s' >>temp_changelog.md
+          echo " " >>temp_changelog.md
+          echo "**NOTE**: @maintainers, you can edit these auto-generated release notes with a more user-friendly summary of the key changes, if needed." >>temp_changelog.md
+          echo " " >>temp_changelog.md
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.ref }}
+          release_name: "Version ${{ github.event.ref }}"
+          draft: false
+          prerelease: false
+          body_path: temp_changelog.md
+
+      - name: Upload arm64 apk
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: app/build/outputs/apk/forkRelease/app-arm64-v8a-forkRelease.apk
+          asset_name: iceraven-browser-arm64-v8a-forkRelease.apk
+          asset_content_type: application/vnd.android.package-archive
+
+
+      - name: Upload armeabi apk
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: app/build/outputs/apk/forkRelease/app-armeabi-v7a-forkRelease.apk
+          asset_name: iceraven-browser-armeabi-v7a-forkRelease.apk
+          asset_content_type: application/vnd.android.package-archive
+
+
+      - name: Upload x86 apk
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: app/build/outputs/apk/forkRelease/app-x86-forkRelease.apk
+          asset_name: iceraven-browser-x86-forkRelease.apk
+          asset_content_type: application/vnd.android.package-archive
+
+
+      - name: Upload x86_64 apk
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: app/build/outputs/apk/forkRelease/app-x86_64-forkRelease.apk
+          asset_name: iceraven-browser-x86_64-forkRelease.apk
+          asset_content_type: application/vnd.android.package-archive

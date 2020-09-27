@@ -21,7 +21,7 @@ That said, Iceraven Browser is an independent all-volunteer project, and has no 
 
 [**Download APKs from the Releases Page**](https://github.com/fork-maintainers/iceraven-browser/releases)
 
-## Building
+## 🔨 Building
 
 1. Set up the environment. We need the Android SDK at `$ANDROID_SDK_ROOT` and a Java JDK at `$JAVA_HOME` that isn't the Ubuntu Java 8 one. We want environment variables that look something like:
 
@@ -86,14 +86,20 @@ Developers are especially welcome, wanted, and needed.
 
 We encourage you to participate in this open source project. We love Pull Requests, Bug Reports, ideas, (security) code reviews or any other kind of positive contribution.
 
-### How to skip CI checks for PRs
+### 🙅 How to skip CI checks for PRs 🙅
 
 If you want to skip Github CI checks in a PR, please add the following to the PR title exactly: `[skip ci]`.
 Also, please include the exact phrase `[skip ci]` in every commit message. This is to avoid Travis CI checks as well as skipping Github CI checks after merging the commits to the `fork` branch.
 
 This is useful to do **if** you are sure that your changes do not effect the app's code (ex: changes to `README.md`).
 
-## I want to file an issue!
+## 🚀 Release automation 🚀
+
+We have now setup release automation so that Github actions automatically trigger a release build and publish a release when we push a tag to the repository.
+
+**NOTE**: The tag should be of the format `iceraven-x.y.z`, where `x.y.z` is the release version, for the automation to kick in and also so that the built app will have the correct version name.
+
+## ✏️  I want to file an issue!
 
 Great! We encourage you to participate in this open source project. We love Pull Requests, Bug Reports, ideas, (security) code reviews or any other kind of positive contribution.
 
