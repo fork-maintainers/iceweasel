@@ -6,7 +6,7 @@ on:
 jobs:
   run-build:
     runs-on: ubuntu-latest
-    if: "! contains(toJSON(github.event.title), '[skip ci]')"
+    if: "! contains(toJSON(github.event.pull_request.title), '[skip ci]')"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -57,7 +57,7 @@ jobs:
 
   run-testDebug:
     runs-on: ubuntu-latest
-    if: "! contains(toJSON(github.event.title), '[skip ci]')"
+    if: "! contains(toJSON(github.event.pull_request.title), '[skip ci]')"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -76,7 +76,7 @@ jobs:
 
   run-detekt:
     runs-on: ubuntu-latest
-    if: "! contains(toJSON(github.event.title), '[skip ci]')"
+    if: "! contains(toJSON(github.event.pull_request.title), '[skip ci]')"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -100,7 +100,7 @@ jobs:
 
   run-ktlint:
     runs-on: ubuntu-latest
-    if: "! contains(toJSON(github.event.title), '[skip ci]')"
+    if: "! contains(toJSON(github.event.pull_request.title), '[skip ci]')"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -119,7 +119,7 @@ jobs:
 
   run-lintDebug:
     runs-on: ubuntu-latest
-    if: "! contains(toJSON(github.event.title), '[skip ci]')"
+    if: "! contains(toJSON(github.event.pull_request.title), '[skip ci]')"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
