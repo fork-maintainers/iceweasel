@@ -1,9 +1,23 @@
-name: Android build
+name: Android build PR
 on:
-  push:
+  pull_request_target:
     branches:
       - fork
 jobs:
+  comment-on-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment on PR with link to checks page
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: |
+            ### Download the built apks
+            You can download the apks built by Github actions **after** the CI checks pass.
+            Please go to the <a href="https://github.com/fork-maintainers/iceraven-browser/pull/${{ github.event.number }}/checks">checks page for this PR</a> to find the zipped apk files under the artifacts drop-down, as seen in the example screenshot below.
+
+            <img src="https://raw.githubusercontent.com/fork-maintainers/iceraven-browser/fork/.github/imgs/download-artifacts-screenshot.png" />
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          allow-repeats: false
   run-build:
     runs-on: ubuntu-latest
     steps:
