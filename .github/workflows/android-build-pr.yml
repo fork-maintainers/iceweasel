@@ -49,7 +49,7 @@ jobs:
           message: |
             ### Download the built apks
             You can download the apks built by Github actions after the CI checks pass.
-            Please go to the <a href="${{ github.event.html_url }}/checks">checks page for this PR</a> to find the zipped apk files under the artifacts drop-down, as seen in the example screenshot below.
+            Please go to the <a href="${{ github.event.pull_request.html_url }}/checks">checks page for this PR</a> to find the zipped apk files under the artifacts drop-down, as seen in the example screenshot below.
 
             <img src="https://raw.githubusercontent.com/fork-maintainers/iceraven-browser/fork/.github/imgs/download-artifacts-screenshot.png" />
           repo-token: ${{ secrets.GITHUB_TOKEN }}
