@@ -35,7 +35,8 @@ jobs:
           echo " " >>temp_changelog.md
           git log ${{ github.event.ref }}...$PREVIOUS_RELEASE_TAG --pretty='format:%C(auto)%h (%as) %s' >>temp_changelog.md
           echo " " >>temp_changelog.md
-          echo "**NOTE**: @maintainers, you can edit these auto-generated release notes with a more user-friendly summary of the key changes, if needed." >>temp_changelog.md
+          echo " " >>temp_changelog.md
+          echo "**NOTE**: @fork-maintainers, you can edit these auto-generated release notes with a more user-friendly summary of the key changes, if needed." >>temp_changelog.md
           echo " " >>temp_changelog.md
 
       - name: Create Release
