@@ -25,26 +25,19 @@ jobs:
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
           arguments: assembleForkRelease -PversionName=${{ env.VERSION_NAME }}
-      - name: Archive arm64 apk
+      - name: Test sign apk files
+        uses: abhijitvalluri/sign-android-release@master
+        with:
+          releaseDirectory: app/build/outputs/apk/forkRelease/
+          signingKeyBase64: ${{ secrets.DEBUG_SIGNING_KEY }}
+          alias: ${{ secrets.DEBUG_ALIAS }}
+          keyStorePassword: ${{ secrets.DEBUG_KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.DEBUG_KEY_PASSWORD }}
+      - name: Test archive everything
         uses: actions/upload-artifact@v2
         with:
-          name: app-arm64-v8a-forkRelease.apk
-          path: app/build/outputs/apk/forkRelease/app-arm64-v8a-forkRelease.apk
-      - name: Archive armeabi apk
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-armeabi-v7a-forkRelease.apk
-          path: app/build/outputs/apk/forkRelease/app-armeabi-v7a-forkRelease.apk
-      - name: Archive x86 apk
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-x86-forkRelease.apk
-          path: app/build/outputs/apk/forkRelease/app-x86-forkRelease.apk
-      - name: Archive x86_64 apk
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-x86_64-forkRelease.apk
-          path: app/build/outputs/apk/forkRelease/app-x86_64-forkRelease.apk
+          name: everything
+          path: app/build/outputs/apk/forkRelease/
       - name: Comment on PR with link to checks page
         uses: mshick/add-pr-comment@v1
         with:
