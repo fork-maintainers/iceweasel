@@ -208,7 +208,7 @@ class HomeFragment : Fragment() {
                             )
                         ).getTip()
                     },
-                    showCollectionPlaceholder = components.settings.showCollectionsPlaceholderOnHome
+                    showCollectionPlaceholder = false
                 )
             )
         }
