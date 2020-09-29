@@ -52,7 +52,7 @@ private const val AUTOPLAY_USER_SETTING = "AUTOPLAY_USER_SETTING"
 class Settings(private val appContext: Context) : PreferencesHolder {
 
     companion object {
-        const val topSitesMaxCount = 16
+        const val topSitesMaxCount = 160
         const val FENIX_PREFERENCES = "fenix_preferences"
 
         private const val BLOCKED_INT = 0

@@ -61,6 +61,6 @@ class TopSitePagerViewHolder(
     companion object {
         const val LAYOUT_ID = R.layout.component_top_sites_pager
         const val TOP_SITES_MAX_PAGE_SIZE = 2
-        const val TOP_SITES_PER_PAGE = 8
+        const val TOP_SITES_PER_PAGE = 20
     }
 }
