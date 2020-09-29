@@ -15,15 +15,15 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Create local.properties (to sign release apk with debug keys)
-        run: echo "autosignReleaseWithDebugKey=" >local.properties
+      - name: Create version name
+        run: echo "::set-env name=VERSION_NAME::$(git describe --tags HEAD)"
       - name: Build forkRelease variant of app
         uses: eskatos/gradle-command-action@v1
         with:
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
-          arguments: assembleForkRelease -PversionName="$(git describe --tags HEAD)"
+          arguments: assembleForkRelease -PversionName=${{ env.VERSION_NAME }}
       - name: Create changelog
         run: |
           PREVIOUS_RELEASE_TAG=$(git tag --list iceraven-* --sort=-creatordate | tail -n+2 | head -n 1)
