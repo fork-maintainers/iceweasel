@@ -26,7 +26,7 @@ jobs:
           configuration-cache-enabled: true
           arguments: assembleForkRelease -PversionName=${{ env.VERSION_NAME }}
       - name: Test sign apk files
-        uses: abhijitvalluri/sign-android-release@v1
+        uses: abhijitvalluri/sign-apks@v0.1
         with:
           releaseDirectory: app/build/outputs/apk/forkRelease/
           signingKeyBase64: ${{ secrets.DEBUG_SIGNING_KEY }}
