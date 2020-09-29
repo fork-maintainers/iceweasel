@@ -494,13 +494,13 @@
 
     <!-- Gestures Preferences-->
     <!-- Preferences for using pull to refresh in a webpage -->
-    <string name="preference_gestures_website_pull_to_refresh">Потяните, чтобы обновить</string>
+    <string name="preference_gestures_website_pull_to_refresh">Потянуть, чтобы обновить</string>
     <!-- Preference for using the dynamic toolbar -->
-    <string name="preference_gestures_dynamic_toolbar">Прокрутите страницу, чтобы скрыть панель инструментов</string>
+    <string name="preference_gestures_dynamic_toolbar">Прокрутить страницу, чтобы скрыть панель инструментов</string>
     <!-- Preference for switching tabs by swiping horizontally on the toolbar -->
-    <string name="preference_gestures_swipe_toolbar_switch_tabs">Проведите в сторону по панели инструментов, чтобы переключить вкладки</string>
+    <string name="preference_gestures_swipe_toolbar_switch_tabs">Провести в сторону по панели инструментов, чтобы переключить вкладки</string>
     <!-- Preference for showing the opened tabs by swiping up on the toolbar-->
-    <string name="preference_gestures_swipe_toolbar_show_tabs">Проведите вверх по панели инструментов, чтобы открыть вкладки</string>
+    <string name="preference_gestures_swipe_toolbar_show_tabs">Провести вверх по панели инструментов, чтобы открыть вкладки</string>
 
     <!-- Library -->
     <!-- Option in Library to open Sessions page -->
@@ -1423,7 +1423,7 @@
     <!-- Title for strip url preference in customization settings -->
     <string name="preferences_strip_url_title">Убрать HTTP/HTTPS/WWW из URL-адресов</string>
     <!-- Description for strip url preference in customization settings -->
-    <string name="preferences_strip_url_description">Включите удаление HTTP/HTTPS/WWW из URL-адресов на панели инструментов и в области вкладок</string>
+    <string name="preferences_strip_url_description">Удалять HTTP/HTTPS/WWW из URL-адресов на панели инструментов и в области вкладок</string>
     <!-- Message displayed in security prompt to reenter a secret pin to access saved logins -->
     <string name="preferences_passwords_saved_logins_enter_pin">Введите ваш PIN-код ещё раз</string>
     <!-- Message displayed in security prompt to access saved logins -->
@@ -1638,6 +1638,13 @@
     <!-- Label for add-ons custom source collection preference -->
     <string name="addons_custom_source_collection">Установить собственную коллекцию дополнений</string>
 
+    <!-- Preference category for system behavior customization -->
+    <string name="preferences_system_behavior">Настроить поведение системы</string>
+    <!-- Title for relinquish memory preference in customization settings -->
+    <string name="preferences_relinquish_memory_title">Приостанавливать вкладки, чтобы их не убили ради памяти</string>
+    <!-- Description for relinquish memory preference in customization settings -->
+    <string name="preferences_relinquish_memory_description">Если эта функция включена, то при нехватке памяти в системе вкладки будут приостановлены, а состояние страницы будет потеряно.</string>
+
     <!-- Label for enable compact tabs in tabs tray preference -->
     <string name="enable_compact_tabs">Включить компактные вкладки</string>
     <!-- Label for enable top tabs tray preference -->
@@ -1653,7 +1660,7 @@
     <!-- Label for top FAB position in tabs tray preference -->
     <string name="fab_tabs_tray_top">Поместить ПКД вверху</string>
     <!-- Label for top FAB position in tabs tray preference -->
-    <string name="fab_tabs_tray_top_description">Разрешить размещать кнопку для новой вкладки вверху, отключите, чтобы разместить ее внизу</string>
+    <string name="fab_tabs_tray_top_description">Разрешить размещать кнопку для новой вкладки вверху, отключите, чтобы разместить её внизу</string>
 
     <!-- Content description for close button in collection placeholder. -->
     <string name="remove_home_collection_placeholder_content_description">Убрать</string>
