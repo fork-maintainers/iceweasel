@@ -10,19 +10,29 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Create local.properties (to sign release apk with debug keys)
-        run: echo "autosignReleaseWithDebugKey=" >local.properties
+      - name: Create version name
+        run: echo "::set-env name=VERSION_NAME::$(git describe --tags HEAD)"
       - name: Build forkRelease variant of app
         uses: eskatos/gradle-command-action@v1
         with:
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
-          arguments: assembleForkRelease -PversionName="$(git describe --tags HEAD)"
+          arguments: assembleForkRelease -PversionName=${{ env.VERSION_NAME }}
+      - name: Create signed APKs
+        uses: abhijitvalluri/sign-apks@v0.6
+        with:
+          releaseDirectory: app/build/outputs/apk/forkRelease/
+          signingKeyBase64: ${{ secrets.DEBUG_SIGNING_KEY }}
+          alias: ${{ secrets.DEBUG_ALIAS }}
+          keyStorePassword: ${{ secrets.DEBUG_KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.DEBUG_KEY_PASSWORD }}
       - name: Archive arm64 apk
         uses: actions/upload-artifact@v2
         with:
