@@ -8,19 +8,46 @@ import androidx.fragment.app.FragmentActivity
 import androidx.preference.Preference
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.mockkObject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import mozilla.components.support.test.robolectric.testContext
+import mozilla.components.support.test.rule.MainCoroutineRule
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
+import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mozilla.fenix.Config
 import org.mozilla.fenix.R
+import org.mozilla.fenix.ReleaseChannel
+import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.getPreferenceKey
 import org.mozilla.fenix.helpers.FenixRobolectricTestRunner
 import org.mozilla.fenix.utils.Settings
 import org.robolectric.Robolectric
+import java.io.IOException
 
+@ExperimentalCoroutinesApi
 @RunWith(FenixRobolectricTestRunner::class)
 class SettingsFragmentTest {
+
+    private val testDispatcher = TestCoroutineDispatcher()
+
+    @get:Rule
+    val coroutinesTestRule = MainCoroutineRule(testDispatcher)
+
+    @Before
+    fun setup() {
+        // Mock client for fetching account avatar
+        val client = testContext.components.core.client
+        every { client.fetch(any()) } throws IOException("test")
+
+        mockkObject(Config)
+        every { Config.channel } returns ReleaseChannel.Nightly
+    }
 
     @Test
     fun `Add-on collection override pref is visible if debug menu active`() {
@@ -30,6 +57,8 @@ class SettingsFragmentTest {
         activity.supportFragmentManager.beginTransaction()
             .add(settingsFragment, "test")
             .commitNow()
+
+        testDispatcher.advanceUntilIdle()
 
         val preferenceAmoCollectionOverride = settingsFragment.findPreference<Preference>(
             settingsFragment.getPreferenceKey(R.string.pref_key_override_amo_collection)
@@ -53,6 +82,8 @@ class SettingsFragmentTest {
         activity.supportFragmentManager.beginTransaction()
             .add(settingsFragment, "test")
             .commitNow()
+
+        testDispatcher.advanceUntilIdle()
 
         val preferenceAmoCollectionOverride = settingsFragment.findPreference<Preference>(
             settingsFragment.getPreferenceKey(R.string.pref_key_override_amo_collection)
