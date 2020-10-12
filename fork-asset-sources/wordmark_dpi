@@ -6,6 +6,6 @@ This is the browser banner on the home page
 Scale to the following for the respective folders:
 *hdpi - 651x120
 *mdpi - 434x80
-*xdpi - 868x160
-*xxdpi - 1302x240
-*xxxdpi - 1736x320
+*xhdpi - 868x160
+*xxhdpi - 1302x240
+*xxxhdpi - 1736x320
